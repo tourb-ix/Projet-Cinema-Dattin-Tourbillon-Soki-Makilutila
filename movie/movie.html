@@ -1,21 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="movie.css"/>
-    </head>
-    <body>
-        <header>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie</title>
 
-        </header>
-        <main>
-            
-        </main>
-        <footer>
+    <!--mise en page générale-->
+    <link rel="stylesheet" href="../common/common.css"> 
+    <!--icone de l'onglet-->
+    <link rel="icon" href="../common/images/logo_cinema.png">
+    <!--avoir des icônes réseaux sociaux via une API DOM-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header id="entete"></header>
 
-        </footer>
-        <script src="movie.js" type="text/javascript"></script>
-    </body>
+<div class="page">
+
+    <aside id="side-bar">
+        <div class="toggle-btn" id="btn">
+            <span id="span_haut"></span>
+            <span id="span_milieu"></span>
+            <span id="span_bas"></span>
+        </div>
+
+        <div id="film_suggere"></div>
+    </aside>
+
+    <main class="content">
+        <h1 id="movie-title"></h1>
+        <img id="movie-poster">
+        <p id="movie-plot"></p>
+        <p id="movie-genre"></p>
+        <p id="movie-actors"></p>
+        <div id="movie-ratings"></div>
+        <p id="movie-dvd"></p>
+    </main>
+
+</div>
+
+<footer id="pied_de_page"></footer>
+    
+    <script src="../common/common.js" type="text/javascript"></script>
+    <script src="./movie.js" type="text/javascript"></script>
+</body>
+
 </html>

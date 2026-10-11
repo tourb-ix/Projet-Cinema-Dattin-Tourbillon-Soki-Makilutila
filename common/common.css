@@ -1,0 +1,280 @@
+/*
+-----------------------------------------
+                GENERAL
+-----------------------------------------
+*/
+
+:root {
+    --bleu-cinema: rgb(3, 3, 67);/*variable CSS pour ne pas rechercher le code rgb à chaque fois*/
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif; /*applique une police à tous les éléments de la page*/
+    box-sizing: border-box;/*evite que les éléments de la page ne débordent en y incluant toujours le padding dans les box*/
+}
+
+body {
+    margin: 0; /*pour enlever l'espace blanc autour de la page*/
+    position: relative; /*pour règler pseudo élément body::before*/
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.page {
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+}
+
+body::before { /*le navigateur crée un élément invisible juste avant le contenu du body*/
+    content: "";/*obligatoire pour afficher un pseudo-élément même si il est vide, il faut qu'il existe*/
+    position: fixed; /*pour s'assurer bqu'il reste toujours au même enbdroit*/
+    inset: 0; /*et que l'élément s'étende sur toute la fen^tre*/
+    background-image: url("./images/logo_cinema.png");
+    background-size: cover; /*l'image rempli tout l'écran*/
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.2; /* ajuste l'opacité de l'image */
+    z-index: -1; /*image en arrière plan*/
+}
+
+main {
+    flex: 1;
+}
+
+
+.page {
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.content { /*permet d'^tre responsive*/
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    flex: 1;
+    padding: 20px;
+}
+
+
+/*
+-----------------------------------------
+                HEADER
+-----------------------------------------
+*/
+
+header {
+    position: fixed; /*fixe le header*/
+    top: 0; /*fixe en haut*/
+    left: 0;
+    width: 100%;
+    z-index: 1000; /*passe devant tout*/
+    transition: 0.3s ease;/*pour que ce soit plus joli*/
+    border-radius: 10px;
+    font-size: larger;
+    background-color:rgb(3, 3, 67);
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+}
+
+header nav {
+    display: flex;
+    background-color:rgb(3, 3, 67);
+    justify-content:space-around;
+    gap: clamp(5px, 2vw, 25px);
+}
+
+header nav a {
+    font-size: clamp(0.6rem, 1.5vw, 1.2rem);
+    white-space: nowrap;
+    background-color: black;
+    padding: 1vw;
+    border-radius: 10px;
+}
+
+header a:link,
+
+header a:visited {
+    color: aliceblue;
+}
+
+header a:hover {
+    color: yellow;
+}
+
+header .logo {
+    width: clamp(20px, 10vw, 200px);
+    height: auto;
+}
+
+
+
+
+
+/*
+-----------------------------------------
+                SIDE-BAR
+-----------------------------------------
+*/
+
+#side-bar {
+  position: relative;
+  width: 230px;
+  min-height: 100vh;
+  background: rgba(255, 255, 0, 0.2);
+  top: 0;
+  left: -230px;
+  transition: 0.5s ease-out;
+  z-index: 4;
+}
+
+#side-bar.open {
+  transform: translateX(230px);
+    right: 1000;
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 30px;
+  left: 240px;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+}
+.toggle-btn span {
+  position: relative;
+  border-radius: 30px;
+  width: 60px;
+  height: 10px;
+  border-radius: 5px;
+  background: yellow;
+  display: block;
+  margin-top: 4px;
+  transition: 0.3s ease;
+}
+
+.open span { /*on change le block "span" lorsque open est actif*/
+  position: absolute;
+}/*chaque span est dépourvu d'id donc on va les séléctionner en javascript*/
+/*enfant1, on met ":" après ".open span" pour signifier que cela est vrai quand open est actif et on précise 1 pour le premier enfant*/
+.open span:nth-child(1){
+  transform : rotate(45deg);
+}
+.open span:nth-child(2){
+  opacity:0;
+}
+.open span:nth-child(3){
+  transform : rotate(-45deg);
+}
+
+/*
+FILM SUGGERE
+*/
+
+#film_suggere{
+    padding: 80px 10px 20px 10px;
+    color: black;
+}
+
+#film_suggere h2{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#film_suggere img{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#film_suggere h3{
+    text-align: center;
+    margin: 10px 0;
+}
+
+#film_suggere p{
+    font-size: 0.85rem;
+    line-height: 1.4;
+    text-align: justify;
+}
+
+#film_suggere a{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: var(--bleu-cinema);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#film_suggere a:hover{
+    background-color: black;
+    color: yellow;
+}
+
+
+
+
+
+/*
+-----------------------------------------
+                FOOTER
+-----------------------------------------
+*/
+
+footer {
+    border-radius: 10px;
+    font-size: clamp(0.6rem, 1.5vw, 1.2rem); /* le text est responsive avec : valeur minimum (rem= par rapport à taille text html), taille idéale 'vw = par rapport à la taille de la fenêtre), valeur maximale */
+    background-color: rgb(3, 3, 67);
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    align-items: start;    /* fait partir du haut de chaque colone */
+    justify-items: center; /* centre horizontalement */
+    padding: 10px;
+    width: 100%;
+}
+
+footer p{
+    color: aliceblue;
+    font-weight: bolder;
+    text-decoration:underline;
+    background-color:rgb(3, 3, 67);
+}
+
+footer a:link,
+
+footer a:visited {
+    color: aliceblue;
+    background-color:rgb(3, 3, 67);
+}
+
+footer a:hover {
+    color: yellow;
+}
+
+footer div{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    background-color:rgb(3, 3, 67);
+}
+
+footer li{
+    background-color:rgb(3, 3, 67);
+}
+
+footer ul{
+    background-color:rgb(3, 3, 67);
+}
+
+
