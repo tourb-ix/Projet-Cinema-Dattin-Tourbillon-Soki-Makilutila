@@ -2,10 +2,10 @@
   position: relative
 }
 
-#caroussel button {
+#caroussel > button {
   position: absolute;
   top: 50%;
-  z-index: 2;
+  z-index: 10;
   transform: translateY(-50%);
   padding: 0.75rem 1rem;
   border: 0;
@@ -16,11 +16,11 @@
   cursor: pointer;
 }
 
-#caroussel button:hover {
+#caroussel > button:hover {
   background-color: rgba(0, 0, 0, 0.9);
 }
 
-#caroussel button:focus-visible {
+#caroussel > button:focus-visible {
   outline: 2px solid white;
   outline-offset: 3px;
 }
@@ -31,6 +31,23 @@
 
 #suivant {
   right: 1rem;
+}
+
+.bouton-favoris {
+  position: absolute;
+  z-index: 3;
+  top: 1rem;
+  right: 1rem;
+  border: 0;
+  background: transparent;
+  color: red;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.bouton-favoris:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
 }
 
 #film-vedette img {
@@ -57,9 +74,26 @@
 
 .vedette-infos {
   flex: 1;
+  position: relative;
+  z-index: 2;
   padding: 2rem;
   opacity: 0;
   transition: opacity 0.25s ease;
+}
+
+.vedette-lien-ordinateur {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.vedette-lien-ordinateur:focus-visible {
+  outline: 3px solid yellow;
+  outline-offset: -3px;
+}
+
+.vedette-lien-mobile {
+  display: none;
 }
 
 @media (hover: hover) {
@@ -96,12 +130,8 @@
   cursor: grab;
 }
 
-/* Image survolée pendant un glisser-déposer */
-#galerie img.drag-over {
-  outline: 4px solid #1abc9c;
-}
-
 .carte {
+  position: relative;
   color: white;
   text-align: center;
   background-color:rgb(3, 3, 67);
@@ -114,6 +144,18 @@
   transform: translateY(-10px);
   box-shadow: 0 24px 58px rgba(0, 0, 0, 1);
 }
+
+.carte > a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.carte > a:focus-visible {
+  outline: 2px solid yellow;
+  outline-offset: 4px;
+}
+
 
 /* Téléphone */
 @media (max-width: 1023px) {
@@ -134,7 +176,7 @@
   .vedette-infos {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: 2;
     background-color: rgba(3, 3, 67, 0.8);
   }
 
@@ -142,7 +184,26 @@
     opacity: 0.2;
   }
 
-    .vedette-carte.infos-visible .vedette-infos {
-    transition-delay: 0s;
+  .vedette-carte.infos-visible .vedette-infos {
+      transition-delay: 0s;
   }
+
+  .vedette-lien-ordinateur {
+    display: none;
+}
+
+  .vedette-lien-mobile {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: white;
+    background-color: rgb(3, 3, 67);
+    border-radius: 0.5rem;
+    text-decoration: none;
+}
+
+  .vedette-lien-mobile:hover,
+  .vedette-lien-mobile:focus-visible {
+    color: yellow;
+}
 }
