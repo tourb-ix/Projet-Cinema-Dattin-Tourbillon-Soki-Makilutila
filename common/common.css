@@ -72,7 +72,6 @@ header {
     width: 100%;
     z-index: 1000; /*passe devant tout*/
     transition: 0.3s ease;/*pour que ce soit plus joli*/
-    border-radius: 10px;
     font-size: larger;
     background-color:rgb(3, 3, 67);
     display: grid;
@@ -233,7 +232,6 @@ FILM SUGGERE
 */
 
 footer {
-    border-radius: 10px;
     font-size: clamp(0.6rem, 1.5vw, 1.2rem); /* le text est responsive avec : valeur minimum (rem= par rapport à taille text html), taille idéale 'vw = par rapport à la taille de la fenêtre), valeur maximale */
     color: aliceblue;
     background-color: rgb(3, 3, 67);
