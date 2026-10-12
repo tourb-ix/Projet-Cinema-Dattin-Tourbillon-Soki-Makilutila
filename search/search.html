@@ -29,7 +29,32 @@
         </aside>
 
         <main class="content">
-        
+            <h2>Un film en particulier?</h2>
+            <input type="text" id="recherche" placeholder="Rechercher un film"/>
+            <select id="categorieSelect">
+                <option value="toutes">Toutes les catégories</option>
+                <!--Remplit en javascript selon le tableau de films-->
+            </select>
+            <select id="date">
+                <option value="recent">Récent</option>
+                <option value="ancien">Ancien</option>
+            </select>
+            <div id="tableau">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Poster</th>
+                            <th>Titre</th>
+                            <th>Réalisateur</th>
+                            <th>Catégorie</th>
+                            <th>Année de sortie</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list_films">
+                        <!--Remplit en javascript-->
+                    </tbody>
+                </table>
+            </div>
         </main>
 
     </div>
@@ -38,6 +63,7 @@
     </footer>
 
     <script src="../common/common.js" type="text/javascript"></script>
+    <script src="../search/search.js" type="text/javascript"></script>
 </body>
 
 </html>
