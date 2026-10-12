@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>page_type</title>
+    <title>Favoris</title>
 
     <!--mise en page générale-->
     <link rel="stylesheet" href="../common/common.css"> 
@@ -11,6 +11,8 @@
     <link rel="icon" href="../common/images/logo_cinema.png">
     <!--avoir des icônes réseaux sociaux via une API DOM-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!--Récupération du css déjà utilisé dans l'index-->
+    <link rel="stylesheet" href="../index/index.css">
 </head>
 <body>
     <header id="entete"></header>
@@ -28,7 +30,11 @@
     </aside>
 
     <main class="content">
-        
+        <section>
+            <h1>Mes favoris</h1>
+            <p id="message-favoris"></p>
+            <div id="galerie-favoris"></div>
+        </section> 
     </main>
 
 </div>
@@ -36,7 +42,7 @@
 <footer id="pied_de_page"></footer>
     
     <script src="../common/common.js" type="text/javascript"></script>
-    <script src="" type="text/javascript"></script>
+    <script src="../favoris/favoris.js" type="module"></script>
 </body>
 
 </html>

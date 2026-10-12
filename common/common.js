@@ -37,13 +37,40 @@ function genererUneEntete() {
         lien_search.setAttribute("alt", "lien vers la recherche");
         lien_search.setAttribute("title", "lien vers la recherche");
         lien_search.textContent = "RECHERCHE" ;
-    //recherche
+    //favoris
     let lien_favoris = document.createElement("a");
         navigation.appendChild(lien_favoris);
-        lien_favoris.setAttribute("href", "../search/search.html");
-        lien_favoris.setAttribute("alt", "lien vers la recherche");
-        lien_favoris.setAttribute("title", "lien vers la recherche");
+        lien_favoris.setAttribute("href", "../favoris/favoris.html");
+        lien_favoris.setAttribute("alt", "lien vers les favoris");
+        lien_favoris.setAttribute("title", "lien vers les favoris");
         lien_favoris.textContent = "FAVORIS" ;
+    //hamburger mobile
+    const bouton_hamburger = document.createElement("button");
+    bouton_hamburger.type = "button";
+    bouton_hamburger.classList.add("bouton-toggle-mobile");
+    bouton_hamburger.setAttribute("aria-expanded", "false");
+    bouton_hamburger.setAttribute("aria-label", "Afficher ou masquer le film suggéré");
+    
+    const barre1 = document.createElement("span");
+    const barre2 = document.createElement("span");
+    const barre3 = document.createElement("span");
+
+    bouton_hamburger.appendChild(barre1);
+    bouton_hamburger.appendChild(barre2);
+    bouton_hamburger.appendChild(barre3);
+    navigation.appendChild(bouton_hamburger);
+
+    bouton_hamburger.addEventListener("click", () => {
+    const filmSuggere = document.getElementById("film_suggere");
+
+    if (!filmSuggere) return;
+
+    const estVisible = filmSuggere.classList.toggle(
+        "suggestion-mobile-visible"
+    );
+
+    bouton_hamburger.setAttribute("aria-expanded", String(estVisible));
+    });
 
     entete.appendChild(navigation);
 };
@@ -272,6 +299,7 @@ window.addEventListener('click',(e) =>{   // le "e" permet de viser qqch en part
 
 
 const API_KEY = "99799775";
+window.API_KEY = API_KEY; // mettre la clef dans un objet afin de la rendre accessible dans les modules
 
 const filmsSuggeres = [
     "Who Framed Roger Rabbit",

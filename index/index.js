@@ -2,6 +2,11 @@
 //GALLERIE DE FILMS
 //----------------------------------------------------------------------------
 
+import {
+  checkFavoris,
+  getFavoris
+} from "../common/stockageFavoris.js";
+
 const films = [
     "Who Framed Roger Rabbit",
     "the little mermaid",
@@ -25,12 +30,10 @@ const films = [
 
 const filmsEnVedette = films.slice(0, 3);
 
-const CLE_FAVORIS = "cinema-favoris";
-
 async function getFilm(titreFilm) {
 
   try {
-    const reponse = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&t=${encodeURIComponent(titreFilm)}&plot=short`);
+    const reponse = await fetch(`https://www.omdbapi.com/?apikey=${window.API_KEY}&t=${encodeURIComponent(titreFilm)}&plot=short`);
     const donnee = await reponse.json();
       if (donnee.Response === "True") 
         return donnee;
@@ -44,33 +47,6 @@ async function getFilm(titreFilm) {
   }
 }
 
-function enregistrerFavoris(favoris) {
-  localStorage.setItem(CLE_FAVORIS, JSON.stringify(favoris));
-}
-
-function checkFavoris() {
-  
-  const donnee = localStorage.getItem(CLE_FAVORIS);
-
-  if (donnee === null)
-    return [];
-  else 
-    return JSON.parse(donnee);
-  
-}
-
-function getFavoris(film) {
-  let favoris = checkFavoris();
-
-  if (favoris.includes(film.imdbID)) {
-    favoris = favoris.filter((imdbID) => imdbID !== film.imdbID);
-  }
-  else {
-    favoris.push(film.imdbID);
-  }
-
-  enregistrerFavoris(favoris);
-}
 
 function afficherFilmVedette(film, destination) {
 
@@ -92,10 +68,18 @@ const titre = document.createElement("h3");
   titre.textContent = film.Title;
 const director = document.createElement("p");
   director.textContent = `Réalisé par : ${film.Director}.`;
-const note = document.createElement("p");
-  note.textContent = film.imdbRating;
 const plot = document.createElement("p");
-  plot.textContent = film.Plot;
+  plot.textContent = `Court résumé : ${film.Plot}`;
+const evaluationContainer = document.createElement("div");
+evaluationContainer.classList.add("movie-ratings");
+
+if (Array.isArray(film.Ratings)) {
+  film.Ratings.forEach((note) => {
+    const p = document.createElement("p");
+    p.textContent = `${note.Source} : ${note.Value}`;
+    evaluationContainer.appendChild(p);
+  });
+}
 
 const lienOrdinateur = document.createElement("a");
   lienOrdinateur.href = `../movie/movie.html?id=${encodeURIComponent(film.imdbID)}`;
@@ -134,9 +118,9 @@ coeur.addEventListener("click", (event) => {
 
 infos.appendChild(titre);
 infos.appendChild(director);
-infos.appendChild(note);
 infos.appendChild(plot);
 infos.appendChild(coeur);
+infos.appendChild(evaluationContainer);
 container.appendChild(image);
 container.appendChild(infos);
 container.appendChild(lienOrdinateur);
