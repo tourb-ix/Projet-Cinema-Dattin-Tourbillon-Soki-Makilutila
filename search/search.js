@@ -73,8 +73,8 @@ nouv_tabl_films().then((résultat)=>{
         let lignes="";
         filmFiltre.forEach(film => {
             lignes+=`<tr>
-                <td><a href='../movie/movie.htlm?id=${encodeURIComponent(film.imdbID)}'><img class='poster_film' src='${film.Affiche}'/></a></td>
-                <td><a href='../movie/movie.htlm?id=${encodeURIComponent(film.imdbID)}'>${film.Titre}</a></td>
+                <td><a href='../movie/movie.html?id=${encodeURIComponent(film.imdbID)}'><img class='poster_film' src='${film.Affiche}'/></a></td>
+                <td><a href='../movie/movie.html?id=${encodeURIComponent(film.imdbID)}'>${film.Titre}</a></td>
                 <td>${film.Réalisateur}</td>
                 <td>${film.Catégorie}</td>
                 <td>${film.Année}</td>
