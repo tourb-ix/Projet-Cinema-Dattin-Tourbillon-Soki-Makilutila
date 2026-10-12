@@ -93,7 +93,7 @@ function genererPiedDePage() {
             lien_search.textContent = "Recherche" ;
     //recherche
     let li_favoris = document.createElement("li");
-        let lien_search = document.createElement("a");
+        let lien_favoris = document.createElement("a");
             li_favoris.appendChild(lien_favoris)
             listage_site.appendChild(li_favoris);
             lien_favoris.setAttribute("href", "./search/search.html");
