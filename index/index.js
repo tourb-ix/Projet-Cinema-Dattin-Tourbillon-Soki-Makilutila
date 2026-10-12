@@ -25,6 +25,8 @@ const films = [
 
 const filmsEnVedette = films.slice(0, 3);
 
+const CLE_FAVORIS = "cinema-favoris";
+
 async function getFilm(titreFilm) {
 
   try {
@@ -42,10 +44,39 @@ async function getFilm(titreFilm) {
   }
 }
 
+function enregistrerFavoris(favoris) {
+  localStorage.setItem(CLE_FAVORIS, JSON.stringify(favoris));
+}
+
+function checkFavoris() {
+  
+  const donnee = localStorage.getItem(CLE_FAVORIS);
+
+  if (donnee === null)
+    return [];
+  else 
+    return JSON.parse(donnee);
+  
+}
+
+function getFavoris(film) {
+  let favoris = checkFavoris();
+
+  if (favoris.includes(film.imdbID)) {
+    favoris = favoris.filter((imdbID) => imdbID !== film.imdbID);
+  }
+  else {
+    favoris.push(film.imdbID);
+  }
+
+  enregistrerFavoris(favoris);
+}
+
 function afficherFilmVedette(film, destination) {
 
 const container = document.createElement("article");
   container.classList.add("vedette-carte");
+
   container.addEventListener("click", () => {
     container.classList.toggle("infos-visible");
   });
@@ -76,10 +107,36 @@ const lienMobile = document.createElement("a");
   lienMobile.textContent = "En savoir plus";
   lienMobile.classList.add("vedette-lien-mobile");
 
+const coeur = document.createElement("button");
+coeur.classList.add("bouton-favoris");
+coeur.type = "button";
+
+// Initialisation de l'état du boutton
+const estFavori = checkFavoris().includes(film.imdbID);
+coeur.textContent = estFavori ? "♥" : "♡";
+coeur.setAttribute(
+  "aria-label",
+  estFavori ? `Retirer ${film.Title} des favoris` : `Ajouter ${film.Title} aux favoris`
+);
+
+// Ajout de l'écoute du click du bouton pour ajouter le film aux favoris et mettre un coeur plein s'il n'est pas déjà présent dans le tableau ou le retirer s'il est déjà dedans et mettre un coeur vide  
+coeur.addEventListener("click", (event) => {
+  event.stopPropagation();
+  getFavoris(film);
+
+  const favoris = checkFavoris().includes(film.imdbID);
+  coeur.textContent = favoris ? "♥" : "♡";
+  coeur.setAttribute(
+    "aria-label",
+    favoris ? `Retirer ${film.Title} des favoris` : `Ajouter ${film.Title} aux favoris`
+  );
+});
+
 infos.appendChild(titre);
 infos.appendChild(director);
 infos.appendChild(note);
 infos.appendChild(plot);
+infos.appendChild(coeur);
 container.appendChild(image);
 container.appendChild(infos);
 container.appendChild(lienOrdinateur);
@@ -101,10 +158,37 @@ const titre = document.createElement("h3");
 const lien = document.createElement("a");
 lien.href = `../movie/movie.html?id=${encodeURIComponent(film.imdbID)}`;
 
-container.appendChild(image);
-container.appendChild(titre);
-lien.appendChild(container);
-destination.appendChild(lien);
+const coeur = document.createElement("button");
+coeur.classList.add("bouton-favoris");
+coeur.type = "button";
+
+// Initialisation de l'état du boutton
+const estFavori = checkFavoris().includes(film.imdbID);
+coeur.textContent = estFavori ? "♥" : "♡";
+coeur.setAttribute(
+  "aria-label",
+  estFavori ? `Retirer ${film.Title} des favoris` : `Ajouter ${film.Title} aux favoris`
+);
+
+// Ajout de l'écoute du click du bouton pour ajouter le film aux favoris et mettre un coeur plein s'il n'est pas déjà présent dans le tableau ou le retirer s'il est déjà dedans et mettre un coeur vide  
+coeur.addEventListener("click", (event) => {
+  event.stopPropagation();
+  getFavoris(film);
+
+  const favoris = checkFavoris().includes(film.imdbID);
+  coeur.textContent = favoris ? "♥" : "♡";
+  coeur.setAttribute(
+    "aria-label",
+    favoris ? `Retirer ${film.Title} des favoris` : `Ajouter ${film.Title} aux favoris`
+  );
+});
+
+
+lien.appendChild(image);
+lien.appendChild(titre);
+container.appendChild(lien);
+container.appendChild(coeur);
+destination.appendChild(container);
 }
 
 const precedent = document.getElementById("precedent");
@@ -192,3 +276,9 @@ function checkBottom() {
 chargementFilmVedette();
 chargementFilmGalerie();
 window.addEventListener("scroll", checkBottom);
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});
