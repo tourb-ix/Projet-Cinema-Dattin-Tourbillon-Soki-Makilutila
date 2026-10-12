@@ -45,35 +45,45 @@ async function getFilm(titreFilm) {
 function afficherFilmVedette(film, destination) {
 
 const container = document.createElement("article");
-container.classList.add("vedette-carte");
-container.addEventListener("click", () => {
-  container.classList.toggle("infos-visible");
-});
+  container.classList.add("vedette-carte");
+  container.addEventListener("click", () => {
+    container.classList.toggle("infos-visible");
+  });
 
-  const image = document.createElement("img");
-    image.src = film.Poster;
-    image.alt = film.Title;
+const image = document.createElement("img");
+  image.src = film.Poster;
+  image.alt = film.Title;
 
 const infos = document.createElement("div");
-infos.classList.add("vedette-infos");
+  infos.classList.add("vedette-infos");
 
 const titre = document.createElement("h3");
-    titre.textContent = film.Title;
+  titre.textContent = film.Title;
 const director = document.createElement("p");
-    director.textContent = film.Director;
+  director.textContent = film.Director;
 const note = document.createElement("p");
-    note.textContent = film.imdbRating;
+  note.textContent = film.imdbRating;
 const plot = document.createElement("p");
-    plot.textContent = film.Plot;
+  plot.textContent = film.Plot;
 
-destination.replaceChildren();
-container.appendChild(image);
-container.appendChild(infos);
+const lienOrdinateur = document.createElement("a");
+  lienOrdinateur.href = `../movie/movie.html?id=${encodeURIComponent(film.imdbID)}`;
+  lienOrdinateur.classList.add("vedette-lien-ordinateur");
+  lienOrdinateur.setAttribute("aria-label", `Voir la fiche de ${film.Title}`);
+
+const lienMobile = document.createElement("a");
+  lienMobile.href = lienOrdinateur.href;
+  lienMobile.textContent = "En savoir plus";
+  lienMobile.classList.add("vedette-lien-mobile");
+
 infos.appendChild(titre);
 infos.appendChild(director);
 infos.appendChild(note);
 infos.appendChild(plot);
-destination.appendChild(container);
+container.appendChild(image);
+container.appendChild(infos);
+container.appendChild(lienOrdinateur);
+destination.replaceChildren(container, lienMobile);
 }
 
 function afficherFilmGalerie(film, destination) {
@@ -88,9 +98,13 @@ const image = document.createElement("img");
 const titre = document.createElement("h3");
     titre.textContent = film.Title;
 
+const lien = document.createElement("a");
+lien.href = `../movie/movie.html?id=${encodeURIComponent(film.imdbID)}`;
+
 container.appendChild(image);
 container.appendChild(titre);
-destination.appendChild(container);
+lien.appendChild(container);
+destination.appendChild(lien);
 }
 
 const precedent = document.getElementById("precedent");
