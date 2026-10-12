@@ -37,6 +37,13 @@ function genererUneEntete() {
         lien_search.setAttribute("alt", "lien vers la recherche");
         lien_search.setAttribute("title", "lien vers la recherche");
         lien_search.textContent = "RECHERCHE" ;
+    //recherche
+    let lien_favoris = document.createElement("a");
+        navigation.appendChild(lien_favoris);
+        lien_favoris.setAttribute("href", "../search/search.html");
+        lien_favoris.setAttribute("alt", "lien vers la recherche");
+        lien_favoris.setAttribute("title", "lien vers la recherche");
+        lien_favoris.textContent = "FAVORIS" ;
 
     entete.appendChild(navigation);
 };
@@ -84,7 +91,15 @@ function genererPiedDePage() {
             lien_search.setAttribute("alt", "lien vers la recherche");
             lien_search.setAttribute("title", "lien vers la recherche");
             lien_search.textContent = "Recherche" ;
-    
+    //recherche
+    let li_favoris = document.createElement("li");
+        let lien_search = document.createElement("a");
+            li_favoris.appendChild(lien_favoris)
+            listage_site.appendChild(li_favoris);
+            lien_favoris.setAttribute("href", "./search/search.html");
+            lien_favoris.setAttribute("alt", "lien vers la recherche");
+            lien_favoris.setAttribute("title", "lien vers la recherche");
+            lien_favoris.textContent = "Favoris" ;
 
     //SECTION 2 LES RESEAUX SOCIAUX
 
