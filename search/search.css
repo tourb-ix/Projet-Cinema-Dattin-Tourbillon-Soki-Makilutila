@@ -1,13 +1,13 @@
 table{
     width:100%;
     border:3px black solid;
-    background: rgb(1, 200, 255);
+    background: rgba(1, 200, 255, 0.9);
     border-collapse: collapse;
 }
 thead{
     background: var(--bleu-cinema);
     color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 th,td{
     border: 1px var(--bleu-cinema) solid;
