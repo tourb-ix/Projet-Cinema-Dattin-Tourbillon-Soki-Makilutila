@@ -206,4 +206,14 @@
   .vedette-lien-mobile:focus-visible {
     color: yellow;
 }
+
+.vedette-carte:hover .vedette-infos {
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+.vedette-carte.infos-visible .vedette-infos {
+  opacity: 1;
+  transition-delay: 0s;
+}
 }
