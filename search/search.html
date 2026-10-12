@@ -7,6 +7,7 @@
 
     <!--mise en page générale-->
     <link rel="stylesheet" href="../common/common.css"> 
+    <link rel="stylesheet" href="../search/search.css">
     <!--icone de l'onglet-->
     <link rel="icon" href="../common/images/logo_cinema.png">
     <!--avoir des icônes réseaux sociaux via une API DOM-->
@@ -30,15 +31,17 @@
 
         <main class="content">
             <h2>Un film en particulier?</h2>
-            <input type="text" id="recherche" placeholder="Rechercher un film"/>
-            <select id="categorieSelect">
-                <option value="toutes">Toutes les catégories</option>
-                <!--Remplit en javascript selon le tableau de films-->
-            </select>
-            <select id="date">
-                <option value="recent">Récent</option>
-                <option value="ancien">Ancien</option>
-            </select>
+            <div class="option_affichage">
+                <input type="text" id="recherche" placeholder="Rechercher un film"/>
+                <select id="categorieSelect">
+                    <option value="toutes">Toutes les catégories</option>
+                    <!--Remplit en javascript selon le tableau de films-->
+                </select>
+                <select id="date">
+                    <option value="recent">Récent</option>
+                    <option value="ancien">Ancien</option>
+                </select>
+            </div>
             <div id="tableau">
                 <table>
                     <thead>
