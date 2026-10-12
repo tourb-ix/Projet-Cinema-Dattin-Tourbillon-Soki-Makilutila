@@ -93,7 +93,16 @@
 }
 
 .vedette-lien-mobile {
-  display: none;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: white;
+  background-color: rgb(3, 3, 67);
+  border-radius: 0.5rem;
+  text-align: center;
+  text-decoration: none;
 }
 
 @media (hover: hover) {
@@ -116,13 +125,13 @@
   transition-delay: 0.5s;
 }
 
-#galerie {
+#galerie, #galerie-favoris {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
 }
 
-#galerie img {
+#galerie img, #galerie-favoris img {
   width: 100%;
   aspect-ratio: 2 / 3; /* réserve la place de l'image avant son téléchargement */
   object-fit: cover;

@@ -299,6 +299,7 @@ window.addEventListener('click',(e) =>{   // le "e" permet de viser qqch en part
 
 
 const API_KEY = "99799775";
+window.API_KEY = API_KEY; // mettre la clef dans un objet afin de la rendre accessible dans les modules
 
 const filmsSuggeres = [
     "Who Framed Roger Rabbit",

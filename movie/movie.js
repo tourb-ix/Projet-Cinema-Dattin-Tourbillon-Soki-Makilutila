@@ -20,11 +20,11 @@ document.getElementById("movie-poster").src = film.Poster;
 
 document.getElementById("movie-director").textContent = `Réalisé par : ${film.Director}.`;
 
-document.getElementById("movie-plot").textContent = film.Plot;
+document.getElementById("movie-plot").textContent = `Résumé : ${film.Plot}`;
 
-document.getElementById("movie-genre").textContent = film.Genre;
+document.getElementById("movie-genre").textContent = `Catégorie(s) : ${film.Genre}.`;
 
-document.getElementById("movie-actors").textContent = film.Actors;
+document.getElementById("movie-actors").textContent = `Avec : ${film.Actors}.`;
 
 const evaluationContainer = document.getElementById("movie-ratings");
 film.Ratings.forEach(note => {
