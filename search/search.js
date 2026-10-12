@@ -52,7 +52,7 @@ const date = document.getElementById("date");
 
 nouv_tabl_films().then((résultat)=>{
     tabl_films=résultat.map(film=>{
-        return({Affiche:film.Poster,Titre:film.Title,Réalisateur:film.Director,Catégorie:film.Genre,Année:film.Year})
+        return({Affiche:film.Poster,Titre:film.Title,Réalisateur:film.Director,Catégorie:film.Genre,Année:film.Year,imdbID:film.imdbID})
     });
 
     /*Remplissage des options du select de catégories*/
