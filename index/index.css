@@ -1,0 +1,148 @@
+#caroussel {
+  position: relative
+}
+
+#caroussel button {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  padding: 0.75rem 1rem;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.65);
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+#caroussel button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+#caroussel button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+#precedent {
+  left: 1rem;
+}
+
+#suivant {
+  right: 1rem;
+}
+
+#film-vedette img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.vedette-carte {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 700px;
+  color: white;
+  background-color:rgb(3, 3, 67);
+}
+
+.vedette-carte img {
+  flex: 0 0 100%;
+  height: 700px;
+  object-fit: contain;
+  transition: flex-basis 0.5s ease;
+}
+
+.vedette-infos {
+  flex: 1;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+@media (hover: hover) {
+  .vedette-carte:hover img {
+    flex-basis: 45%;
+  }
+
+  .vedette-carte:hover .vedette-infos {
+    opacity: 1;
+    transition-delay: 0.5s;
+  }
+}
+
+.vedette-carte.infos-visible img {
+  flex-basis: 45%;
+}
+
+.vedette-carte.infos-visible .vedette-infos {
+  opacity: 1;
+  transition-delay: 0.5s;
+}
+
+#galerie {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+#galerie img {
+  width: 100%;
+  aspect-ratio: 2 / 3; /* réserve la place de l'image avant son téléchargement */
+  object-fit: cover;
+  border-radius: 0.5rem;
+  cursor: grab;
+}
+
+/* Image survolée pendant un glisser-déposer */
+#galerie img.drag-over {
+  outline: 4px solid #1abc9c;
+}
+
+.carte {
+  color: white;
+  text-align: center;
+  background-color:rgb(3, 3, 67);
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carte:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 24px 58px rgba(0, 0, 0, 1);
+}
+
+/* Téléphone */
+@media (max-width: 1023px) {
+  .vedette-carte {
+    display: block;
+    min-height: 500px;
+  }
+
+  .vedette-carte img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.25s ease;
+  }
+
+  .vedette-infos {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-color: rgba(3, 3, 67, 0.8);
+  }
+
+  .vedette-carte.infos-visible img {
+    opacity: 0.2;
+  }
+
+    .vedette-carte.infos-visible .vedette-infos {
+    transition-delay: 0s;
+  }
+}

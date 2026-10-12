@@ -301,7 +301,7 @@ const filmsSuggeres = [
     "Robin Hood",
     "Sister Act",
     "Léon",
-    "(The Hobbit: An Unexpected Journey",
+    "The Hobbit: An Unexpected Journey",
     "The fifth element",
     "Battlestar Galactica",
 ];
