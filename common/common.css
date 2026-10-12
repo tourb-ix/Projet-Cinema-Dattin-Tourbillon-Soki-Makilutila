@@ -126,7 +126,7 @@ header .logo {
   position: relative;
   width: 230px;
   min-height: 100vh;
-  background: rgba(255, 255, 0, 0.2);
+  background: rgba(255, 0, 0, 0.2);
   top: 0;
   left: -230px;
   transition: 0.5s ease-out;
@@ -152,7 +152,7 @@ header .logo {
   width: 60px;
   height: 10px;
   border-radius: 5px;
-  background: yellow;
+  background: red;
   display: block;
   margin-top: 4px;
   transition: 0.3s ease;
@@ -235,6 +235,7 @@ FILM SUGGERE
 footer {
     border-radius: 10px;
     font-size: clamp(0.6rem, 1.5vw, 1.2rem); /* le text est responsive avec : valeur minimum (rem= par rapport à taille text html), taille idéale 'vw = par rapport à la taille de la fenêtre), valeur maximale */
+    color: aliceblue;
     background-color: rgb(3, 3, 67);
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
