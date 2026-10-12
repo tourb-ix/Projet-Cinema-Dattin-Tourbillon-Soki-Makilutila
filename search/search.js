@@ -49,6 +49,7 @@ const list_films=document.getElementById("list_films");
 const recherche = document.getElementById("recherche");
 const categorieSelect = document.getElementById("categorieSelect");
 const date = document.getElementById("date");
+const loader=document.getElementById("chargement");
 
 nouv_tabl_films().then((résultat)=>{
     tabl_films=résultat.map(film=>{
@@ -73,8 +74,8 @@ nouv_tabl_films().then((résultat)=>{
         let lignes="";
         filmFiltre.forEach(film => {
             lignes+=`<tr>
-                <td><a href='../movie/movie.htlm?id=${encodeURIComponent(film.imdbID)}'><img class='poster_film' src='${film.Affiche}'/></a></td>
-                <td><a href='../movie/movie.htlm?id=${encodeURIComponent(film.imdbID)}'>${film.Titre}</a></td>
+                <td><a id='aImg' href='../movie/movie.htlm?id=${encodeURIComponent(film.imdbID)}'><img class='poster_film' src='${film.Affiche}'/></a></td>
+                <td><a id='aTitre' href='../movie/movie.htlm?id=${encodeURIComponent(film.imdbID)}'><strong>${film.Titre}</strong></a></td>
                 <td>${film.Réalisateur}</td>
                 <td>${film.Catégorie}</td>
                 <td>${film.Année}</td>
@@ -106,4 +107,5 @@ nouv_tabl_films().then((résultat)=>{
     categorieSelect.addEventListener('change', afficherFilms);
     date.addEventListener('change', afficherFilms);
     afficherFilms();
+    loader.hidden='false';
 })

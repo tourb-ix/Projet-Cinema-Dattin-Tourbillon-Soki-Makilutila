@@ -17,31 +17,41 @@ th,td{
     padding-right: 5px;   
 }
 
-td a{
+#aTitre{
     text-decoration: none;
     color:black;
+    transition: 0.25s;
 }
-td a:hover{
+.poster_film:hover{
+    border-color: white;
+}
+
+#aTitre:hover{
     background: white;
 }
+
 .poster_film{
     width: 80%;
     height: 80%;
     min-width: 140px;
     min-height: 200px;
+    border: 5px solid transparent;
+    transition: ease-in-out 0.25s;
 }
 
 #recherche{
     margin-right: 20px;
     margin-bottom: 30px;
-    width: 250px;
-    height:30px;
+    width: 300px;
+    height:40px;
+    font-size: 100%;
 }
 
 #categorieSelect, #date{
-    height:30px;
+    height:40px;
     margin-right: 20px;
     margin-bottom: 30px;
+    font-size: 100%;
 }
 
 #optionAffichage{
