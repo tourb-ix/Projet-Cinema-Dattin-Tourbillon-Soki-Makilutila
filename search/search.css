@@ -1,0 +1,51 @@
+table{
+    width:100%;
+    border:3px black solid;
+    background: rgb(1, 200, 255);
+    border-collapse: collapse;
+}
+thead{
+    background: var(--bleu-cinema);
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+th,td{
+    border: 1px var(--bleu-cinema) solid;
+    text-align: center;
+    padding-top:5px;
+    padding-left: 5px;
+    padding-right: 5px;   
+}
+
+td a{
+    text-decoration: none;
+    color:black;
+}
+td a:hover{
+    background: white;
+}
+.poster_film{
+    width: 80%;
+    height: 80%;
+    min-width: 140px;
+    min-height: 200px;
+}
+
+#recherche{
+    margin-right: 20px;
+    margin-bottom: 30px;
+    width: 250px;
+    height:30px;
+}
+
+#categorieSelect, #date{
+    height:30px;
+    margin-right: 20px;
+    margin-bottom: 30px;
+}
+
+#optionAffichage{
+    display: flex;
+    flex-flow:wrap;
+    gap:20px;
+}

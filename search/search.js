@@ -50,9 +50,9 @@ const recherche = document.getElementById("recherche");
 const categorieSelect = document.getElementById("categorieSelect");
 const date = document.getElementById("date");
 
-nouv_tabl_films(10).then((résultat)=>{
+nouv_tabl_films().then((résultat)=>{
     tabl_films=résultat.map(film=>{
-        return({Affiche:film.Poster,Titre:film.Title,Réalisateur:film.Director,Catégorie:film.Genre,Année:film.Year})
+        return({Affiche:film.Poster,Titre:film.Title,Réalisateur:film.Director,Catégorie:film.Genre,Année:film.Year,imdbID:film.imdbID})
     });
 
     /*Remplissage des options du select de catégories*/
@@ -73,8 +73,8 @@ nouv_tabl_films(10).then((résultat)=>{
         let lignes="";
         filmFiltre.forEach(film => {
             lignes+=`<tr>
-                <td><img class='poster_film' src='${film.Affiche}'/></td>
-                <td>${film.Titre}</td>
+                <td><a href='../movie/movie.htlm?id=${encodeURIComponent(film.imdbID)}'><img class='poster_film' src='${film.Affiche}'/></a></td>
+                <td><a href='../movie/movie.htlm?id=${encodeURIComponent(film.imdbID)}'>${film.Titre}</a></td>
                 <td>${film.Réalisateur}</td>
                 <td>${film.Catégorie}</td>
                 <td>${film.Année}</td>
