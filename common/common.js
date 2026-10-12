@@ -26,31 +26,17 @@ function genererUneEntete() {
     //index
     let lien_index = document.createElement("a");
         navigation.appendChild(lien_index);
-        lien_index.setAttribute("href", "./index/index.html");
+        lien_index.setAttribute("href", "../index/index.html");
         lien_index.setAttribute("alt", "lien vers l'index");
         lien_index.setAttribute("title", "lien vers l'index");
         lien_index.textContent = "ACCUEIL" ;
-    //film
-    let lien_film = document.createElement("a");
-        navigation.appendChild(lien_film);
-        lien_film.setAttribute("href", "./movie/movie.html");
-        lien_film.setAttribute("alt", "lien vers les films");
-        lien_film.setAttribute("title", "lien vers les films");
-        lien_film.textContent = "LES FILMS" ;
     //recherche
     let lien_search = document.createElement("a");
         navigation.appendChild(lien_search);
-        lien_search.setAttribute("href", "./search/search.html");
+        lien_search.setAttribute("href", "../search/search.html");
         lien_search.setAttribute("alt", "lien vers la recherche");
         lien_search.setAttribute("title", "lien vers la recherche");
         lien_search.textContent = "RECHERCHE" ;
-    //calendrier
-    let lien_calendrier = document.createElement("a");
-        navigation.appendChild(lien_calendrier);
-        lien_calendrier.setAttribute("href", "./calendar/calendar.html");
-        lien_calendrier.setAttribute("alt", "lien vers le calendrier");
-        lien_calendrier.setAttribute("title", "lien vers le calendrier");
-        lien_calendrier.textContent = "CALENDRIER" ;
 
     entete.appendChild(navigation);
 };
@@ -107,15 +93,7 @@ function genererPiedDePage() {
             lien_search.setAttribute("alt", "lien vers la recherche");
             lien_search.setAttribute("title", "lien vers la recherche");
             lien_search.textContent = "Recherche" ;
-    //calendrier
-    let li_calendrier = document.createElement("li");
-        let lien_calendrier = document.createElement("a");
-            li_calendrier.appendChild(lien_calendrier)
-            listage_site.appendChild(li_calendrier);
-            lien_calendrier.setAttribute("href", "./calendar/calendar.html");
-            lien_calendrier.setAttribute("alt", "lien vers le calendrier");
-            lien_calendrier.setAttribute("title", "lien vers le calendrier");
-            lien_calendrier.textContent = "Calendrier" ;
+    
 
     //SECTION 2 LES RESEAUX SOCIAUX
 
