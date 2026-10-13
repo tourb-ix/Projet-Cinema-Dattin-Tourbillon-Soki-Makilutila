@@ -44,6 +44,29 @@ function genererUneEntete() {
         lien_favoris.setAttribute("alt", "lien vers les favoris");
         lien_favoris.setAttribute("title", "lien vers les favoris");
         lien_favoris.textContent = "FAVORIS" ;
+    // bouton mode sombre / clair
+    let boutonTheme = document.createElement("button");
+        navigation.appendChild(boutonTheme);
+        boutonTheme.id = "theme-btn";
+    // Lecture du thème enregistré
+        if(localStorage.getItem("theme") === "light") {
+            document.body.classList.add("light-mode");
+            boutonTheme.textContent = "🌙";
+        }
+        else {
+            boutonTheme.textContent = "☀️";
+        }
+    // Gestion du clic
+    boutonTheme.addEventListener("click", () => {
+        document.body.classList.toggle("light-mode");
+        if(document.body.classList.contains("light-mode")) {
+        boutonTheme.textContent = "🌙";
+        localStorage.setItem("theme", "light");
+        } else {
+        boutonTheme.textContent = "☀️";
+        localStorage.setItem("theme", "dark");
+        }
+    });
     //hamburger mobile
     const bouton_hamburger = document.createElement("button");
     bouton_hamburger.type = "button";
@@ -75,6 +98,8 @@ function genererUneEntete() {
     entete.appendChild(navigation);
 };
 genererUneEntete();
+
+
 
 //-----------------
 //PIEDS DE PAGES:
