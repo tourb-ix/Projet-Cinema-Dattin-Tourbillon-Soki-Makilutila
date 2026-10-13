@@ -44,10 +44,34 @@ function genererUneEntete() {
         lien_favoris.setAttribute("alt", "lien vers la recherche");
         lien_favoris.setAttribute("title", "lien vers la recherche");
         lien_favoris.textContent = "FAVORIS" ;
-
+    // bouton mode sombre / clair
+    let boutonTheme = document.createElement("button");
+        navigation.appendChild(boutonTheme);
+        boutonTheme.id = "theme-btn";
+    // Lecture du thème enregistré
+        if(localStorage.getItem("theme") === "light") {
+            document.body.classList.add("light-mode");
+            boutonTheme.textContent = "🌙";
+        }
+        else {
+            boutonTheme.textContent = "☀️";
+        }
+    // Gestion du clic
+    boutonTheme.addEventListener("click", () => {
+        document.body.classList.toggle("light-mode");
+        if(document.body.classList.contains("light-mode")) {
+        boutonTheme.textContent = "🌙";
+        localStorage.setItem("theme", "light");
+        } else {
+        boutonTheme.textContent = "☀️";
+        localStorage.setItem("theme", "dark");
+        }
+    });
     entete.appendChild(navigation);
 };
 genererUneEntete();
+
+
 
 //-----------------
 //PIEDS DE PAGES:
@@ -93,7 +117,7 @@ function genererPiedDePage() {
             lien_search.textContent = "Recherche" ;
     //recherche
     let li_favoris = document.createElement("li");
-        let lien_search = document.createElement("a");
+        let lien_favoris = document.createElement("a");
             li_favoris.appendChild(lien_favoris)
             listage_site.appendChild(li_favoris);
             lien_favoris.setAttribute("href", "./search/search.html");

@@ -58,6 +58,72 @@ main {
     padding: 20px;
 }
 
+/*
+-----------------------------------------
+            MODE CLAIR
+-----------------------------------------
+*/
+
+body.light-mode {
+    background-color: white;
+    color: black;
+}
+
+body.light-mode header {
+    background-color: #d8d8d8;
+}
+
+body.light-mode header nav {
+    background-color: #d8d8d8;
+}
+
+body.light-mode header nav a {
+    background-color: white;
+    color: black;
+}
+
+body.light-mode header nav button {
+    background-color: white;
+    color: black;
+}
+
+body.light-mode footer {
+    background-color: #d8d8d8;
+    color: black;
+}
+
+body.light-mode footer p,
+body.light-mode footer div,
+body.light-mode footer ul,
+body.light-mode footer li,
+body.light-mode footer a {
+    background-color: #d8d8d8;
+    color: black;
+}
+
+body.light-mode #film_suggere a {
+    background-color: #d8d8d8;
+    color: black;
+}
+
+body.light-mode #film_suggere a:hover {
+    background-color: white;
+    color: black;
+}
+
+header nav button {
+    font-size: clamp(0.6rem, 1.5vw, 1.2rem);
+    padding: 1vw;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: black;
+    color: aliceblue;
+}
+
+header nav button:hover {
+    color: yellow;
+}
 
 /*
 -----------------------------------------
