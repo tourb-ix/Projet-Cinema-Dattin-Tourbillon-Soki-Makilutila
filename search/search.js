@@ -1,5 +1,7 @@
-/*Création d'une fonction qui renvoie un nombre entier aléatoire entre 2 entiers a et b*/
-/*On pourra metrre ce genre de fonctions qui s'utilise sur plusieurs fichiers dans un module.js comme on l'a fait lors d'un des TP de fin*/
+import {
+  checkFavoris,
+  getFavoris
+} from "../common/stockageFavoris.js";
 
 function afficheOK(url){
     return new Promise((resolve)=>{
@@ -9,7 +11,7 @@ function afficheOK(url){
         img.src=url;
     });
 }
-/*Récupération d'un film dans l'API clé=242fe89 ou 8f33d95d*/
+/*Récupération d'un film dans l'API*/
 async function getFilm(titreFilm){
     try{
         const reponse=await fetch(`http://www.omdbapi.com/?t=${encodeURIComponent(titreFilm)}&apikey=b130f3c2`);
@@ -44,6 +46,7 @@ async function nouv_tabl_films(){
         }
     return(API_films);
 }
+
 let tabl_films;
 const list_films=document.getElementById("list_films");
 const recherche = document.getElementById("recherche");
@@ -71,24 +74,49 @@ nouv_tabl_films().then((résultat)=>{
     let filmFiltre=[...tabl_films]
     function remplirTableau(){ 
         let lignes="";
+        
         filmFiltre.forEach(film => {
+            // Initialisation de l'état du bouton
+            const estFavori = checkFavoris().includes(film.imdbID);
+            const textBouton = estFavori ? "♥" : "♡";
+            const aria = estFavori ? `Retirer ${film.Titre} des favoris` : `Ajouter ${film.Titre} aux favoris`;
+            
             lignes+=`<tr>
+<<<<<<< Updated upstream
                 <td><a href='../movie/movie.html?id=${encodeURIComponent(film.imdbID)}'><img class='poster_film' src='${film.Affiche}'/></a></td>
                 <td><a href='../movie/movie.html?id=${encodeURIComponent(film.imdbID)}'>${film.Titre}</a></td>
+=======
+                <td><a href="../movie/movie.html?id=${encodeURIComponent(film.imdbID)}"><img class="poster_film" src="${film.Affiche}" alt="Affiche de ${film.Titre}"/></a><button type="button" class="bouton-favoris" data-id="${film.imdbID}" aria-label="${aria}">${textBouton}</button></td>
+                <td><a id="aTitre" href="../movie/movie.html?id=${encodeURIComponent(film.imdbID)}"><strong>${film.Titre}</strong></a></td>
+>>>>>>> Stashed changes
                 <td>${film.Réalisateur}</td>
                 <td>${film.Catégorie}</td>
                 <td>${film.Année}</td>
-            </tr>`;
-            
+            </tr>`; 
         });
-        
         list_films.innerHTML=lignes;
     }
+
+    list_films.addEventListener("click", (event) => {
+        
+        const bouton=event.target.closest(".bouton-favoris");
+        if(!bouton){return;};
+        event.stopPropagation();
+        const filmID=bouton.getAttribute('data-id');
+        const film=filmFiltre.find(f=> f.imdbID===filmID);
+        getFavoris(film);
+        const favoris = checkFavoris().includes(film.imdbID);
+        bouton.textContent = favoris ? "♥" : "♡";
+        bouton.setAttribute(
+            "aria-label",
+            favoris ? `Retirer ${film.Titre} des favoris` : `Ajouter ${film.Titre} aux favoris`
+            );
+        });
+
     function afficherFilms() {
         const motRecherche = recherche.value.toLowerCase();
         const categorieChoisie = categorieSelect.value;
         const ordreDate = date.value;
-        console.log(ordreDate);
 
         /*Filtre des catégories et de la barre de recherche par rapport au titre et au réalisateur*/
         filmFiltre = tabl_films.filter(film => {

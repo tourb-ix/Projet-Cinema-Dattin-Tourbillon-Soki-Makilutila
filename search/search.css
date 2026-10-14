@@ -1,7 +1,7 @@
 table{
     width:100%;
     border:3px black solid;
-    background: rgb(1, 200, 255);
+    background: var(--bleu-clair);
     border-collapse: collapse;
 }
 thead{
@@ -48,4 +48,23 @@ td a:hover{
     display: flex;
     flex-flow:wrap;
     gap:20px;
+}
+td:first-child{
+    position:relative;
+}
+.bouton-favoris {
+  position: absolute;
+  z-index: 3;
+  top: 1rem;
+  right:3rem;
+  border: 0;
+  background: transparent;
+  color: red;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.bouton-favoris:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
 }
