@@ -59,6 +59,72 @@ main {
     padding: 20px;
 }
 
+/*
+-----------------------------------------
+            MODE CLAIR
+-----------------------------------------
+*/
+
+body.light-mode {
+    background-color: white;
+    color: black;
+}
+
+body.light-mode header {
+    background-color: #d8d8d8;
+}
+
+body.light-mode header nav {
+    background-color: #d8d8d8;
+}
+
+body.light-mode header nav a {
+    background-color: white;
+    color: black;
+}
+
+body.light-mode header nav button {
+    background-color: white;
+    color: black;
+}
+
+body.light-mode footer {
+    background-color: #d8d8d8;
+    color: black;
+}
+
+body.light-mode footer p,
+body.light-mode footer div,
+body.light-mode footer ul,
+body.light-mode footer li,
+body.light-mode footer a {
+    background-color: #d8d8d8;
+    color: black;
+}
+
+body.light-mode #film_suggere a {
+    background-color: #d8d8d8;
+    color: black;
+}
+
+body.light-mode #film_suggere a:hover {
+    background-color: white;
+    color: black;
+}
+
+header nav button {
+    font-size: clamp(0.6rem, 1.5vw, 1.2rem);
+    padding: 1vw;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: black;
+    color: aliceblue;
+}
+
+header nav button:hover {
+    color: yellow;
+}
 
 /*
 -----------------------------------------
@@ -73,7 +139,6 @@ header {
     width: 100%;
     z-index: 1000; /*passe devant tout*/
     transition: 0.3s ease;/*pour que ce soit plus joli*/
-    border-radius: 10px;
     font-size: larger;
     background-color:rgb(3, 3, 67);
     display: grid;
@@ -130,7 +195,7 @@ header .logo {
   background: rgba(255, 0, 0, 0.2);
   top: 0;
   left: -230px;
-  transition: 0.5s ease-out;
+  transition: transform 0.5s ease-out;
   z-index: 4;
 }
 
@@ -234,7 +299,6 @@ FILM SUGGERE
 */
 
 footer {
-    border-radius: 10px;
     font-size: clamp(0.6rem, 1.5vw, 1.2rem); /* le text est responsive avec : valeur minimum (rem= par rapport à taille text html), taille idéale 'vw = par rapport à la taille de la fenêtre), valeur maximale */
     color: aliceblue;
     background-color: rgb(3, 3, 67);
@@ -279,4 +343,84 @@ footer ul{
     background-color:rgb(3, 3, 67);
 }
 
+/*
+-----------------------------------------------------------
+                GESTION DU BOUTON BURGER POUR MOBILE
+-----------------------------------------------------------
+*/
 
+.bouton-toggle-mobile {
+    display: none;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.bouton-toggle-mobile span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: white;
+}
+
+@media (max-width: 1023px) {
+    .page {
+    flex-direction: column;
+    }
+
+    header {
+        grid-template-columns: auto 1fr;
+    }
+
+    header nav {
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    header nav a {
+        padding: 0.55rem 0.4rem;
+        font-size: clamp(0.55rem, 2.4vw, 0.85rem);
+    }
+
+    header nav .bouton-toggle-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 0.5rem;
+    }
+
+    #side-bar .toggle-btn {
+        display: none;
+    }
+
+    #side-bar {
+        width: 100%;
+        min-height: 0;
+        left: 0;
+        transform: none;
+        transition: none;
+        background: transparent;
+    }
+
+    #film_suggere {
+        display: none;
+        max-width: 420px;
+        margin: 0 auto;
+        padding: 12px 16px 20px;
+        text-align: center;
+    }
+
+    #film_suggere.suggestion-mobile-visible {
+        display: block;
+    }
+
+    #film_suggere img {
+        display: block;
+        width: auto;
+        max-width: 100%;
+        max-height: 45vh;
+        margin: 0 auto 10px;
+        object-fit: contain;
+    }
+}

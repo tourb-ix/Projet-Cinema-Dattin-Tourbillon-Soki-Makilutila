@@ -37,10 +37,69 @@ function genererUneEntete() {
         lien_search.setAttribute("alt", "lien vers la recherche");
         lien_search.setAttribute("title", "lien vers la recherche");
         lien_search.textContent = "RECHERCHE" ;
+    //favoris
+    let lien_favoris = document.createElement("a");
+        navigation.appendChild(lien_favoris);
+        lien_favoris.setAttribute("href", "../favoris/favoris.html");
+        lien_favoris.setAttribute("alt", "lien vers les favoris");
+        lien_favoris.setAttribute("title", "lien vers les favoris");
+        lien_favoris.textContent = "FAVORIS" ;
+    // bouton mode sombre / clair
+    let boutonTheme = document.createElement("button");
+        navigation.appendChild(boutonTheme);
+        boutonTheme.id = "theme-btn";
+    // Lecture du thème enregistré
+        if(localStorage.getItem("theme") === "light") {
+            document.body.classList.add("light-mode");
+            boutonTheme.textContent = "🌙";
+        }
+        else {
+            boutonTheme.textContent = "☀️";
+        }
+    // Gestion du clic
+    boutonTheme.addEventListener("click", () => {
+        document.body.classList.toggle("light-mode");
+        if(document.body.classList.contains("light-mode")) {
+        boutonTheme.textContent = "🌙";
+        localStorage.setItem("theme", "light");
+        } else {
+        boutonTheme.textContent = "☀️";
+        localStorage.setItem("theme", "dark");
+        }
+    });
+    //hamburger mobile
+    const bouton_hamburger = document.createElement("button");
+    bouton_hamburger.type = "button";
+    bouton_hamburger.classList.add("bouton-toggle-mobile");
+    bouton_hamburger.setAttribute("aria-expanded", "false");
+    bouton_hamburger.setAttribute("aria-label", "Afficher ou masquer le film suggéré");
+    
+    const barre1 = document.createElement("span");
+    const barre2 = document.createElement("span");
+    const barre3 = document.createElement("span");
+
+    bouton_hamburger.appendChild(barre1);
+    bouton_hamburger.appendChild(barre2);
+    bouton_hamburger.appendChild(barre3);
+    navigation.appendChild(bouton_hamburger);
+
+    bouton_hamburger.addEventListener("click", () => {
+    const filmSuggere = document.getElementById("film_suggere");
+
+    if (!filmSuggere) return;
+
+    const estVisible = filmSuggere.classList.toggle(
+        "suggestion-mobile-visible"
+    );
+
+    bouton_hamburger.setAttribute("aria-expanded", String(estVisible));
+    });
 
     entete.appendChild(navigation);
 };
 genererUneEntete();
+
+
 
 //-----------------
 //PIEDS DE PAGES:
@@ -75,15 +134,6 @@ function genererPiedDePage() {
             lien_index.setAttribute("alt", "lien vers l'index");
             lien_index.setAttribute("title", "lien vers l'index");
             lien_index.textContent = "Accueil" ;
-    //film
-    let li_film = document.createElement("li");
-        let lien_film = document.createElement("a");
-            li_film.appendChild(lien_film)
-            listage_site.appendChild(li_film);
-            lien_film.setAttribute("href", "./movie/movie.html");
-            lien_film.setAttribute("alt", "lien vers les films");
-            lien_film.setAttribute("title", "lien vers les films");
-            lien_film.textContent = "Les Films" ;
     //recherche
     let li_search = document.createElement("li");
         let lien_search = document.createElement("a");
@@ -93,7 +143,15 @@ function genererPiedDePage() {
             lien_search.setAttribute("alt", "lien vers la recherche");
             lien_search.setAttribute("title", "lien vers la recherche");
             lien_search.textContent = "Recherche" ;
-    
+    //recherche
+    let li_favoris = document.createElement("li");
+        let lien_favoris = document.createElement("a");
+            li_favoris.appendChild(lien_favoris)
+            listage_site.appendChild(li_favoris);
+            lien_favoris.setAttribute("href", "./search/search.html");
+            lien_favoris.setAttribute("alt", "lien vers la recherche");
+            lien_favoris.setAttribute("title", "lien vers la recherche");
+            lien_favoris.textContent = "Favoris" ;
 
     //SECTION 2 LES RESEAUX SOCIAUX
 
@@ -213,6 +271,16 @@ window.addEventListener('scroll', () => {
 //Sidebar:
 //--------------------
 
+// ajuster automatiquement la position de la page
+function ajusterLayout() {
+    const hauteurHeader = header.offsetHeight;
+    page.style.marginTop = hauteurHeader + "px"
+};
+// au chargement
+window.addEventListener("load", ajusterLayout);
+// lors d'un redimensionnement
+window.addEventListener("resize", ajusterLayout);
+
 // Créer un événement au click sur le hamburger menu pour sortir la sidebar, ranger la sidebar si on reclick dessus
 const toggleBtn = document.querySelector(".toggle-btn")//on dféfini le bouton
 // on défini la side bar et on ajoute un #side-bar.open en CSS.
@@ -226,20 +294,7 @@ const content = document.querySelector(".content");
 const header = document.querySelector("#entete");
 // on selectionne page pour le dimenssioner
 const page = document.querySelector(".page");
-
-
-// ajuster automatiquement la position de la page
-function ajusterLayout() {
-    const hauteurHeader = header.offsetHeight;
-    page.style.marginTop = hauteurHeader + "px";
-
-}
-// au chargement
-window.addEventListener("load", ajusterLayout);
-// lors d'un redimensionnement
-window.addEventListener("resize", ajusterLayout);
-
-
+;
 //on applique le listener à l'event clic au bouton
 toggleBtn.addEventListener('click',() => {
     
@@ -255,13 +310,21 @@ toggleBtn.addEventListener('click',() => {
     } else {
         content.style.opacity = 1 ;
     }
+});
 
+// Ranger la sidebar si on click sur le contenu principal
+window.addEventListener('click',(e) =>{   // le "e" permet de viser qqch en particulier
+    if (!sidebar.contains(e.target)){    //le point d'exclamation va tout selectionner sauf la sidebar
+        sidebar.classList.remove('open'); //classlist permet de "remove" un css
+        content.style.opacity = 1;
+    }
 });
 
 //remplir la sidebar avec des suggestions de film:
 
 
 const API_KEY = "99799775";
+window.API_KEY = API_KEY; // mettre la clef dans un objet afin de la rendre accessible dans les modules
 
 const filmsSuggeres = [
     "Who Framed Roger Rabbit",
@@ -340,10 +403,3 @@ afficherFilmSuggere();
 
 
 
-// Ranger la sidebar si on click sur le contenu principal
-
-window.addEventListener('click',(e) =>{   // le "e" permet de viser qqch en particulier
-    if (!sidebar.contains(e.target)){    //le point d'exclamation va tout selectionner sauf la sidebar
-        sidebar.classList.remove('open'); //classlist permet de "remove" un css
-    }
-});

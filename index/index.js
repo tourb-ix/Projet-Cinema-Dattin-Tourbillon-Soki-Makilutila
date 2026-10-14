@@ -2,6 +2,11 @@
 //GALLERIE DE FILMS
 //----------------------------------------------------------------------------
 
+import {
+  checkFavoris,
+  getFavoris
+} from "../common/stockageFavoris.js";
+
 const films = [
     "Who Framed Roger Rabbit",
     "the little mermaid",
@@ -28,7 +33,7 @@ const filmsEnVedette = films.slice(0, 3);
 async function getFilm(titreFilm) {
 
   try {
-    const reponse = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&t=${encodeURIComponent(titreFilm)}&plot=short`);
+    const reponse = await fetch(`https://www.omdbapi.com/?apikey=${window.API_KEY}&t=${encodeURIComponent(titreFilm)}&plot=short`);
     const donnee = await reponse.json();
       if (donnee.Response === "True") 
         return donnee;
@@ -42,14 +47,15 @@ async function getFilm(titreFilm) {
   }
 }
 
+
 function afficherFilmVedette(film, destination) {
 
   const container = document.createElement("article");
     container.classList.add("vedette-carte");
 
-    container.addEventListener("click", () => {
-      container.classList.toggle("infos-visible");
-    });
+  container.addEventListener("click", () => {
+    container.classList.toggle("infos-visible");
+  });
 
   const image = document.createElement("img");
     image.src = film.Poster;
@@ -254,3 +260,9 @@ function checkBottom() {
 chargementFilmVedette();
 chargementFilmGalerie();
 window.addEventListener("scroll", checkBottom);
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});

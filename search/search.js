@@ -52,6 +52,7 @@ const list_films=document.getElementById("list_films");
 const recherche = document.getElementById("recherche");
 const categorieSelect = document.getElementById("categorieSelect");
 const date = document.getElementById("date");
+const loader=document.getElementById("chargement");
 
 nouv_tabl_films().then((résultat)=>{
     tabl_films=résultat.map(film=>{
@@ -82,13 +83,8 @@ nouv_tabl_films().then((résultat)=>{
             const aria = estFavori ? `Retirer ${film.Titre} des favoris` : `Ajouter ${film.Titre} aux favoris`;
             
             lignes+=`<tr>
-<<<<<<< Updated upstream
-                <td><a href='../movie/movie.html?id=${encodeURIComponent(film.imdbID)}'><img class='poster_film' src='${film.Affiche}'/></a></td>
-                <td><a href='../movie/movie.html?id=${encodeURIComponent(film.imdbID)}'>${film.Titre}</a></td>
-=======
                 <td><a href="../movie/movie.html?id=${encodeURIComponent(film.imdbID)}"><img class="poster_film" src="${film.Affiche}" alt="Affiche de ${film.Titre}"/></a><button type="button" class="bouton-favoris" data-id="${film.imdbID}" aria-label="${aria}">${textBouton}</button></td>
                 <td><a id="aTitre" href="../movie/movie.html?id=${encodeURIComponent(film.imdbID)}"><strong>${film.Titre}</strong></a></td>
->>>>>>> Stashed changes
                 <td>${film.Réalisateur}</td>
                 <td>${film.Catégorie}</td>
                 <td>${film.Année}</td>
@@ -134,4 +130,5 @@ nouv_tabl_films().then((résultat)=>{
     categorieSelect.addEventListener('change', afficherFilms);
     date.addEventListener('change', afficherFilms);
     afficherFilms();
+    loader.hidden='false';
 })
