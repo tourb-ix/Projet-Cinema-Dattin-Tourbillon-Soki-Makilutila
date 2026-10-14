@@ -6,6 +6,7 @@
 
 :root {
     --bleu-cinema: rgb(3, 3, 67);/*variable CSS pour ne pas rechercher le code rgb à chaque fois*/
+    --bleu-clair:rgba(1, 200, 255, 0.9);
 }
 
 * {

@@ -50,129 +50,129 @@ async function getFilm(titreFilm) {
 
 function afficherFilmVedette(film, destination) {
 
-const container = document.createElement("article");
-  container.classList.add("vedette-carte");
+  const container = document.createElement("article");
+    container.classList.add("vedette-carte");
 
   container.addEventListener("click", () => {
     container.classList.toggle("infos-visible");
   });
 
-const image = document.createElement("img");
-  image.src = film.Poster;
-  image.alt = film.Title;
+  const image = document.createElement("img");
+    image.src = film.Poster;
+    image.alt = film.Title;
 
-const infos = document.createElement("div");
-  infos.classList.add("vedette-infos");
+  const infos = document.createElement("div");
+    infos.classList.add("vedette-infos");
 
-const titre = document.createElement("h3");
-  titre.textContent = film.Title;
-const director = document.createElement("p");
-  director.textContent = `Réalisé par : ${film.Director}.`;
-const plot = document.createElement("p");
-  plot.textContent = `Court résumé : ${film.Plot}`;
-const evaluationContainer = document.createElement("div");
-evaluationContainer.classList.add("movie-ratings");
+  const titre = document.createElement("h3");
+    titre.textContent = film.Title;
+  const director = document.createElement("p");
+    director.textContent = `Réalisé par : ${film.Director}.`;
+  const plot = document.createElement("p");
+    plot.textContent = `Court résumé : ${film.Plot}`;
+  const evaluationContainer = document.createElement("div");
+  evaluationContainer.classList.add("movie-ratings");
 
-if (Array.isArray(film.Ratings)) {
-  film.Ratings.forEach((note) => {
-    const p = document.createElement("p");
-    p.textContent = `${note.Source} : ${note.Value}`;
-    evaluationContainer.appendChild(p);
-  });
-}
+  if (Array.isArray(film.Ratings)) {
+    film.Ratings.forEach((note) => {
+      const p = document.createElement("p");
+      p.textContent = `${note.Source} : ${note.Value}`;
+      evaluationContainer.appendChild(p);
+    });
+  }
 
-const lienOrdinateur = document.createElement("a");
-  lienOrdinateur.href = `../movie/movie.html?id=${encodeURIComponent(film.imdbID)}`;
-  lienOrdinateur.classList.add("vedette-lien-ordinateur");
-  lienOrdinateur.setAttribute("aria-label", `Voir la fiche de ${film.Title}`);
+  const lienOrdinateur = document.createElement("a");
+    lienOrdinateur.href = `../movie/movie.html?id=${encodeURIComponent(film.imdbID)}`;
+    lienOrdinateur.classList.add("vedette-lien-ordinateur");
+    lienOrdinateur.setAttribute("aria-label", `Voir la fiche de ${film.Title}`);
 
-const lienMobile = document.createElement("a");
-  lienMobile.href = lienOrdinateur.href;
-  lienMobile.textContent = "En savoir plus";
-  lienMobile.classList.add("vedette-lien-mobile");
+  const lienMobile = document.createElement("a");
+    lienMobile.href = lienOrdinateur.href;
+    lienMobile.textContent = "En savoir plus";
+    lienMobile.classList.add("vedette-lien-mobile");
 
-const coeur = document.createElement("button");
-coeur.classList.add("bouton-favoris");
-coeur.type = "button";
+  const coeur = document.createElement("button");
+  coeur.classList.add("bouton-favoris");
+  coeur.type = "button";
 
-// Initialisation de l'état du boutton
-const estFavori = checkFavoris().includes(film.imdbID);
-coeur.textContent = estFavori ? "♥" : "♡";
-coeur.setAttribute(
-  "aria-label",
-  estFavori ? `Retirer ${film.Title} des favoris` : `Ajouter ${film.Title} aux favoris`
-);
-
-// Ajout de l'écoute du click du bouton pour ajouter le film aux favoris et mettre un coeur plein s'il n'est pas déjà présent dans le tableau ou le retirer s'il est déjà dedans et mettre un coeur vide  
-coeur.addEventListener("click", (event) => {
-  event.stopPropagation();
-  getFavoris(film);
-
-  const favoris = checkFavoris().includes(film.imdbID);
-  coeur.textContent = favoris ? "♥" : "♡";
+  // Initialisation de l'état du boutton
+  const estFavori = checkFavoris().includes(film.imdbID);
+  coeur.textContent = estFavori ? "♥" : "♡";
   coeur.setAttribute(
     "aria-label",
-    favoris ? `Retirer ${film.Title} des favoris` : `Ajouter ${film.Title} aux favoris`
+    estFavori ? `Retirer ${film.Title} des favoris` : `Ajouter ${film.Title} aux favoris`
   );
-});
 
-infos.appendChild(titre);
-infos.appendChild(director);
-infos.appendChild(plot);
-infos.appendChild(coeur);
-infos.appendChild(evaluationContainer);
-container.appendChild(image);
-container.appendChild(infos);
-container.appendChild(lienOrdinateur);
-destination.replaceChildren(container, lienMobile);
+  // Ajout de l'écoute du click du bouton pour ajouter le film aux favoris et mettre un coeur plein s'il n'est pas déjà présent dans le tableau ou le retirer s'il est déjà dedans et mettre un coeur vide  
+  coeur.addEventListener("click", (event) => {
+    event.stopPropagation();
+    getFavoris(film);
+
+    const favoris = checkFavoris().includes(film.imdbID);
+    coeur.textContent = favoris ? "♥" : "♡";
+    coeur.setAttribute(
+      "aria-label",
+      favoris ? `Retirer ${film.Title} des favoris` : `Ajouter ${film.Title} aux favoris`
+    );
+  });
+
+  infos.appendChild(titre);
+  infos.appendChild(director);
+  infos.appendChild(plot);
+  infos.appendChild(coeur);
+  infos.appendChild(evaluationContainer);
+  container.appendChild(image);
+  container.appendChild(infos);
+  container.appendChild(lienOrdinateur);
+  destination.replaceChildren(container, lienMobile);
 }
 
 function afficherFilmGalerie(film, destination) {
 
-const container = document.createElement("article");
-container.classList.add("carte");
+  const container = document.createElement("article");
+  container.classList.add("carte");
 
-const image = document.createElement("img");
-    image.src = film.Poster;
-    image.alt = film.Title;
+  const image = document.createElement("img");
+      image.src = film.Poster;
+      image.alt = film.Title;
 
-const titre = document.createElement("h3");
-    titre.textContent = film.Title;
+  const titre = document.createElement("h3");
+      titre.textContent = film.Title;
 
-const lien = document.createElement("a");
-lien.href = `../movie/movie.html?id=${encodeURIComponent(film.imdbID)}`;
+  const lien = document.createElement("a");
+  lien.href = `../movie/movie.html?id=${encodeURIComponent(film.imdbID)}`;
 
-const coeur = document.createElement("button");
-coeur.classList.add("bouton-favoris");
-coeur.type = "button";
+  const coeur = document.createElement("button");
+  coeur.classList.add("bouton-favoris");
+  coeur.type = "button";
 
-// Initialisation de l'état du boutton
-const estFavori = checkFavoris().includes(film.imdbID);
-coeur.textContent = estFavori ? "♥" : "♡";
-coeur.setAttribute(
-  "aria-label",
-  estFavori ? `Retirer ${film.Title} des favoris` : `Ajouter ${film.Title} aux favoris`
-);
-
-// Ajout de l'écoute du click du bouton pour ajouter le film aux favoris et mettre un coeur plein s'il n'est pas déjà présent dans le tableau ou le retirer s'il est déjà dedans et mettre un coeur vide  
-coeur.addEventListener("click", (event) => {
-  event.stopPropagation();
-  getFavoris(film);
-
-  const favoris = checkFavoris().includes(film.imdbID);
-  coeur.textContent = favoris ? "♥" : "♡";
+  // Initialisation de l'état du boutton
+  const estFavori = checkFavoris().includes(film.imdbID);
+  coeur.textContent = estFavori ? "♥" : "♡";
   coeur.setAttribute(
     "aria-label",
-    favoris ? `Retirer ${film.Title} des favoris` : `Ajouter ${film.Title} aux favoris`
+    estFavori ? `Retirer ${film.Title} des favoris` : `Ajouter ${film.Title} aux favoris`
   );
-});
+
+  // Ajout de l'écoute du click du bouton pour ajouter le film aux favoris et mettre un coeur plein s'il n'est pas déjà présent dans le tableau ou le retirer s'il est déjà dedans et mettre un coeur vide  
+  coeur.addEventListener("click", (event) => {
+    event.stopPropagation();
+    getFavoris(film);
+
+    const favoris = checkFavoris().includes(film.imdbID);
+    coeur.textContent = favoris ? "♥" : "♡";
+    coeur.setAttribute(
+      "aria-label",
+      favoris ? `Retirer ${film.Title} des favoris` : `Ajouter ${film.Title} aux favoris`
+    );
+  });
 
 
-lien.appendChild(image);
-lien.appendChild(titre);
-container.appendChild(lien);
-container.appendChild(coeur);
-destination.appendChild(container);
+  lien.appendChild(image);
+  lien.appendChild(titre);
+  container.appendChild(lien);
+  container.appendChild(coeur);
+  destination.appendChild(container);
 }
 
 const precedent = document.getElementById("precedent");
