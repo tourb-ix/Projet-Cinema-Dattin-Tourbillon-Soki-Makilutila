@@ -27,6 +27,7 @@ body {
     flex: 1;
 }
 
+/*image de fon d'écran*/
 body::before { /*le navigateur crée un élément invisible juste avant le contenu du body*/
     content: "";/*obligatoire pour afficher un pseudo-élément même si il est vide, il faut qu'il existe*/
     position: fixed; /*pour s'assurer bqu'il reste toujours au même enbdroit*/
@@ -35,14 +36,18 @@ body::before { /*le navigateur crée un élément invisible juste avant le conte
     background-size: cover; /*l'image rempli tout l'écran*/
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.2; /* ajuste l'opacité de l'image */
+    opacity: 0.4; /* ajuste l'opacité de l'image */
     z-index: -1; /*image en arrière plan*/
+}
+
+body.dark-mode::before {
+    background-image: url("./images/logo_cinema_nuit.png");
+    opacity: 1;
 }
 
 main {
     flex: 1;
 }
-
 
 .page {
     display: flex;
@@ -50,66 +55,17 @@ main {
     flex: 1;
 }
 
-.content { /*permet d'^tre responsive*/
+.content { /*permet d'être responsive*/
     width: 100%;
     max-width: 1200px;
     margin: auto;
     flex: 1;
     padding: 20px;
+    background-color: rgb(240,248,255,0.5);
 }
 
-/*
------------------------------------------
-            MODE CLAIR
------------------------------------------
-*/
 
-body.light-mode {
-    background-color: white;
-    color: black;
-}
 
-body.light-mode header {
-    background-color: #d8d8d8;
-}
-
-body.light-mode header nav {
-    background-color: #d8d8d8;
-}
-
-body.light-mode header nav a {
-    background-color: white;
-    color: black;
-}
-
-body.light-mode header nav button {
-    background-color: white;
-    color: black;
-}
-
-body.light-mode footer {
-    background-color: #d8d8d8;
-    color: black;
-}
-
-body.light-mode footer p,
-body.light-mode footer div,
-body.light-mode footer ul,
-body.light-mode footer li,
-body.light-mode footer a {
-    background-color: #d8d8d8;
-    color: black;
-}
-
-body.light-mode #film_suggere a {
-    background-color: #d8d8d8;
-    color: black;
-}
-
-body.light-mode #film_suggere a:hover {
-    background-color: white;
-    color: black;
-}
 
 header nav button {
     font-size: clamp(0.6rem, 1.5vw, 1.2rem);
@@ -191,7 +147,7 @@ header .logo {
   position: relative;
   width: 230px;
   min-height: 100vh;
-  background: rgba(255, 0, 0, 0.2);
+  background: rgba(255, 0, 0, 0.7);
   top: 0;
   left: -230px;
   transition: 0.5s ease-out;
