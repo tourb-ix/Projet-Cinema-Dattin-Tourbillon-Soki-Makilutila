@@ -14,7 +14,7 @@ function afficheOK(url){
 /*Récupération d'un film dans l'API*/
 async function getFilm(titreFilm){
     try{
-        const reponse=await fetch(`http://www.omdbapi.com/?t=${encodeURIComponent(titreFilm)}&apikey=b130f3c2`);
+        const reponse=await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(titreFilm)}&apikey=242fe89`);
         if(!reponse.ok){
             throw new Error(`Impossible de récupérer le film ${titreFilm}`);
         }

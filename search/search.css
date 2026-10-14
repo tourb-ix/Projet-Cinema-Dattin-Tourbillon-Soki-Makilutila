@@ -22,11 +22,11 @@ th,td{
     color:black;
     transition: 0.25s;
 }
-.poster_film:hover{
+.poster_film:hover, .poster_film:focus{
     border-color: white;
 }
 
-#aTitre:hover{
+#aTitre:hover, #aTitre:focus{
     background: white;
 }
 
