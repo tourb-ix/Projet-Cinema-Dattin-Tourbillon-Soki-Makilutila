@@ -7,6 +7,8 @@
 
     <!--mise en page générale-->
     <link rel="stylesheet" href="../common/common.css"> 
+    <!--mise en page spécifique-->
+    <link rel="stylesheet" href="../movie/movie.css"> 
     <!--icone de l'onglet-->
     <link rel="icon" href="../common/images/logo_cinema.png">
     <!--avoir des icônes réseaux sociaux via une API DOM-->
@@ -28,14 +30,18 @@
     </aside>
 
     <main class="content">
-        <h1 id="movie-title"></h1>
-        <img id="movie-poster">
-        <p id="movie-director"></p>
-        <p id="movie-plot"></p>
-        <p id="movie-genre"></p>
-        <p id="movie-actors"></p>
-        <div id="movie-ratings"></div>
-        <p id="movie-dvd"></p>
+        <div id="presentation">
+            <h1 id="movie-title"></h1>
+            <img id="movie-poster">
+        </div>
+        <div id="description">
+            <p id="movie-director"></p>
+            <p id="movie-plot"></p>
+            <p id="movie-genre"></p>
+            <p id="movie-actors"></p>
+            <div id="movie-ratings"></div>
+            <p id="movie-dvd"></p>
+        </div>
     </main>
 
 </div>

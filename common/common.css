@@ -22,12 +22,7 @@ body {
     flex-direction: column;
 }
 
-.page {
-    display: flex;
-    align-items: flex-start;
-    flex: 1;
-}
-
+/*image de fon d'écran*/
 body::before { /*le navigateur crée un élément invisible juste avant le contenu du body*/
     content: "";/*obligatoire pour afficher un pseudo-élément même si il est vide, il faut qu'il existe*/
     position: fixed; /*pour s'assurer bqu'il reste toujours au même enbdroit*/
@@ -36,14 +31,28 @@ body::before { /*le navigateur crée un élément invisible juste avant le conte
     background-size: cover; /*l'image rempli tout l'écran*/
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.2; /* ajuste l'opacité de l'image */
+    opacity: 0.4; /* ajuste l'opacité de l'image */
     z-index: -1; /*image en arrière plan*/
+}
+
+body.dark-mode::before {
+    background-image: url("./images/logo_cinema_nuit.png");
+    opacity: 1;
+}
+
+body.dark-mode h1{
+    color: aliceblue;
+}
+body.dark-mode h2{
+    color: aliceblue;
+}
+body.dark-mode h3{
+    color: aliceblue;
 }
 
 main {
     flex: 1;
 }
-
 
 .page {
     display: flex;
@@ -51,65 +60,12 @@ main {
     flex: 1;
 }
 
-.content { /*permet d'^tre responsive*/
+.content { /*permet d'être responsive*/
     width: 100%;
     max-width: 1200px;
     margin: auto;
     flex: 1;
     padding: 20px;
-}
-
-/*
------------------------------------------
-            MODE CLAIR
------------------------------------------
-*/
-
-body.light-mode {
-    background-color: white;
-    color: black;
-}
-
-body.light-mode header {
-    background-color: #d8d8d8;
-}
-
-body.light-mode header nav {
-    background-color: #d8d8d8;
-}
-
-body.light-mode header nav a {
-    background-color: white;
-    color: black;
-}
-
-body.light-mode header nav button {
-    background-color: white;
-    color: black;
-}
-
-body.light-mode footer {
-    background-color: #d8d8d8;
-    color: black;
-}
-
-body.light-mode footer p,
-body.light-mode footer div,
-body.light-mode footer ul,
-body.light-mode footer li,
-body.light-mode footer a {
-    background-color: #d8d8d8;
-    color: black;
-}
-
-body.light-mode #film_suggere a {
-    background-color: #d8d8d8;
-    color: black;
-}
-
-body.light-mode #film_suggere a:hover {
-    background-color: white;
-    color: black;
 }
 
 header nav button {
@@ -151,15 +107,27 @@ header {
 header nav {
     display: flex;
     background-color:rgb(3, 3, 67);
-    justify-content:space-around;
-    gap: clamp(5px, 2vw, 25px);
+    justify-content:space-between;
+    flex-wrap: wrap;
+}
+
+header nav a:nth-of-type(1) {
+    max-height: max-content;
+}
+
+header nav a:nth-of-type(2) {
+    max-height: max-content;
+}
+
+header nav a:nth-of-type(3) {
+    max-height: max-content;
 }
 
 header nav a {
     font-size: clamp(0.6rem, 1.5vw, 1.2rem);
     white-space: nowrap;
     background-color: black;
-    padding: 1vw;
+    padding: 0.5vw;
     border-radius: 10px;
 }
 
@@ -192,7 +160,7 @@ header .logo {
   position: relative;
   width: 230px;
   min-height: 100vh;
-  background: rgba(255, 0, 0, 0.2);
+  background: rgba(255, 0, 0, 0.7);
   top: 0;
   left: -230px;
   transition: transform 0.5s ease-out;
@@ -268,6 +236,7 @@ FILM SUGGERE
     font-size: 0.85rem;
     line-height: 1.4;
     text-align: justify;
+    background-color: rgb(255, 0 ,0, 0.5);
 }
 
 #film_suggere a{
@@ -361,27 +330,20 @@ footer ul{
     width: 26px;
     height: 3px;
     border-radius: 3px;
-    background-color: white;
+    background-color: rgba(255, 0, 0);
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 768px) {
     .page {
     flex-direction: column;
     }
 
-    header {
-        grid-template-columns: auto 1fr;
+
+    .bouton-toggle-mobile {
+        max-height: max-content;
     }
 
-    header nav {
-        align-items: center;
-        gap: 0.35rem;
-    }
-
-    header nav a {
-        padding: 0.55rem 0.4rem;
-        font-size: clamp(0.55rem, 2.4vw, 0.85rem);
-    }
+    
 
     header nav .bouton-toggle-mobile {
         display: flex;
@@ -389,6 +351,7 @@ footer ul{
         gap: 5px;
         padding: 0.5rem;
     }
+    
 
     #side-bar .toggle-btn {
         display: none;
@@ -400,7 +363,7 @@ footer ul{
         left: 0;
         transform: none;
         transition: none;
-        background: transparent;
+        background: rgba(255, 0, 0, 0.7);;
     }
 
     #film_suggere {

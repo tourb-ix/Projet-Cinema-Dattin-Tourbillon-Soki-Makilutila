@@ -49,24 +49,25 @@ function genererUneEntete() {
         navigation.appendChild(boutonTheme);
         boutonTheme.id = "theme-btn";
     // Lecture du thème enregistré
-        if(localStorage.getItem("theme") === "light") {
-            document.body.classList.add("light-mode");
-            boutonTheme.textContent = "🌙";
-        }
-        else {
+        if(localStorage.getItem("theme") === "dark") {
+            document.body.classList.add("dark-mode");
             boutonTheme.textContent = "☀️";
+        } else {
+        boutonTheme.textContent = "🌙";
         }
+
     // Gestion du clic
     boutonTheme.addEventListener("click", () => {
-        document.body.classList.toggle("light-mode");
-        if(document.body.classList.contains("light-mode")) {
-        boutonTheme.textContent = "🌙";
-        localStorage.setItem("theme", "light");
+        document.body.classList.toggle("dark-mode");
+        if(document.body.classList.contains("dark-mode")) {
+            boutonTheme.textContent = "☀️";
+            localStorage.setItem("theme", "dark");
         } else {
-        boutonTheme.textContent = "☀️";
-        localStorage.setItem("theme", "dark");
+            boutonTheme.textContent = "🌙";
+            localStorage.setItem("theme", "light");
         }
-    });
+});
+
     //hamburger mobile
     const bouton_hamburger = document.createElement("button");
     bouton_hamburger.type = "button";
@@ -85,16 +86,12 @@ function genererUneEntete() {
 
     bouton_hamburger.addEventListener("click", () => {
     const filmSuggere = document.getElementById("film_suggere");
-
     if (!filmSuggere) return;
-
     const estVisible = filmSuggere.classList.toggle(
         "suggestion-mobile-visible"
     );
-
     bouton_hamburger.setAttribute("aria-expanded", String(estVisible));
     });
-
     entete.appendChild(navigation);
 };
 genererUneEntete();
