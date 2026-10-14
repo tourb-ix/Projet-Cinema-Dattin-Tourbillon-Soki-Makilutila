@@ -49,12 +49,12 @@ function genererUneEntete() {
         navigation.appendChild(boutonTheme);
         boutonTheme.id = "theme-btn";
     // Lecture du thème enregistré
-    if(localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-    boutonTheme.textContent = "☀️";
-    } else {
-    boutonTheme.textContent = "🌙";
-    }
+        if(localStorage.getItem("theme") === "dark") {
+            document.body.classList.add("dark-mode");
+            boutonTheme.textContent = "☀️";
+        } else {
+        boutonTheme.textContent = "🌙";
+        }
 
     // Gestion du clic
     boutonTheme.addEventListener("click", () => {

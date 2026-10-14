@@ -21,12 +21,6 @@ body {
     flex-direction: column;
 }
 
-.page {
-    display: flex;
-    align-items: flex-start;
-    flex: 1;
-}
-
 /*image de fon d'écran*/
 body::before { /*le navigateur crée un élément invisible juste avant le contenu du body*/
     content: "";/*obligatoire pour afficher un pseudo-élément même si il est vide, il faut qu'il existe*/
@@ -43,6 +37,16 @@ body::before { /*le navigateur crée un élément invisible juste avant le conte
 body.dark-mode::before {
     background-image: url("./images/logo_cinema_nuit.png");
     opacity: 1;
+}
+
+body.dark-mode h1{
+    color: aliceblue;
+}
+body.dark-mode h2{
+    color: aliceblue;
+}
+body.dark-mode h3{
+    color: aliceblue;
 }
 
 main {
@@ -62,13 +66,6 @@ main {
     flex: 1;
     padding: 20px;
 }
-
-body.dark-mode .content {
-    background-color: rgb(240,248,255,0.5);
-}
-
-
-
 
 header nav button {
     font-size: clamp(0.6rem, 1.5vw, 1.2rem);
@@ -109,15 +106,27 @@ header {
 header nav {
     display: flex;
     background-color:rgb(3, 3, 67);
-    justify-content:space-around;
-    gap: clamp(5px, 2vw, 25px);
+    justify-content:space-between;
+    flex-wrap: wrap;
+}
+
+header nav a:nth-of-type(1) {
+    max-height: max-content;
+}
+
+header nav a:nth-of-type(2) {
+    max-height: max-content;
+}
+
+header nav a:nth-of-type(3) {
+    max-height: max-content;
 }
 
 header nav a {
     font-size: clamp(0.6rem, 1.5vw, 1.2rem);
     white-space: nowrap;
     background-color: black;
-    padding: 1vw;
+    padding: 0.5vw;
     border-radius: 10px;
 }
 
@@ -226,6 +235,7 @@ FILM SUGGERE
     font-size: 0.85rem;
     line-height: 1.4;
     text-align: justify;
+    background-color: rgb(255, 0 ,0, 0.5);
 }
 
 #film_suggere a{
@@ -322,24 +332,17 @@ footer ul{
     background-color: rgba(255, 0, 0);
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 768px) {
     .page {
     flex-direction: column;
     }
 
-    header {
-        grid-template-columns: auto 1fr;
+
+    .bouton-toggle-mobile {
+        max-height: max-content;
     }
 
-    header nav {
-        align-items: center;
-        gap: 0.35rem;
-    }
-
-    header nav a {
-        padding: 0.55rem 0.4rem;
-        font-size: clamp(0.55rem, 2.4vw, 0.85rem);
-    }
+    
 
     header nav .bouton-toggle-mobile {
         display: flex;
@@ -347,6 +350,7 @@ footer ul{
         gap: 5px;
         padding: 0.5rem;
     }
+    
 
     #side-bar .toggle-btn {
         display: none;
