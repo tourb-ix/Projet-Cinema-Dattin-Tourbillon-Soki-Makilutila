@@ -1,7 +1,8 @@
 //----------------------------------------------------------
 //GALLERIE DE FILMS
-//----------------------------------------------------------------------------
+//----------------------------------------------------------
 
+// Utilisation du module "stockageFavoris" car il est utilisé dans toutes les pages 
 import {
   checkFavoris,
   getFavoris
@@ -30,11 +31,15 @@ const films = [
 
 const filmsEnVedette = films.slice(0, 3);
 
+
+//-----------------
+//Obtention des films grâce à leur titre et notre clef API
+//-----------------
 async function getFilm(titreFilm) {
 
   try {
-    const reponse = await fetch(`https://www.omdbapi.com/?apikey=${window.API_KEY}&t=${encodeURIComponent(titreFilm)}&plot=short`);
-    const donnee = await reponse.json();
+    const reponse = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&t=${encodeURIComponent(titreFilm)}&plot=short`);
+    const donnee = await reponse.json(); // conversion des données .json reçues
       if (donnee.Response === "True") 
         return donnee;
       else {
@@ -47,9 +52,12 @@ async function getFilm(titreFilm) {
   }
 }
 
-
+//---------------------------------------------
+//CREATION DU CONTENU DES FILMS MIS EN AVANT
+//---------------------------------------------
 function afficherFilmVedette(film, destination) {
 
+//Création de la carte contenant les informations des films 
   const container = document.createElement("article");
     container.classList.add("vedette-carte");
 
@@ -81,11 +89,14 @@ function afficherFilmVedette(film, destination) {
     });
   }
 
+//Adapation de possibilité de cliquer sur l'image ou non pour accéder à sa fiche descriptive si on est sur mobile ou non :
+// Sur ordinateur : l'image est cliquable pour aller sur la fiche descriptive
   const lienOrdinateur = document.createElement("a");
     lienOrdinateur.href = `../movie/movie.html?id=${encodeURIComponent(film.imdbID)}`;
     lienOrdinateur.classList.add("vedette-lien-ordinateur");
     lienOrdinateur.setAttribute("aria-label", `Voir la fiche de ${film.Title}`);
 
+// Sur téléphone : seul le bouton en savoir plus est cliquable et c'est la description du film qui apparait au clic
   const lienMobile = document.createElement("a");
     lienMobile.href = lienOrdinateur.href;
     lienMobile.textContent = "En savoir plus";
@@ -95,6 +106,7 @@ function afficherFilmVedette(film, destination) {
   coeur.classList.add("bouton-favoris");
   coeur.type = "button";
 
+  // Ajout du boutton favoris
   // Initialisation de l'état du boutton
   const estFavori = checkFavoris().includes(film.imdbID);
   coeur.textContent = estFavori ? "♥" : "♡";
@@ -127,6 +139,13 @@ function afficherFilmVedette(film, destination) {
   destination.replaceChildren(container, lienMobile);
 }
 
+//-----------------
+//GALERIE DES FILMS
+//-----------------
+
+//---------------------------------------
+//Création des cartes pour chaque film
+//---------------------------------------
 function afficherFilmGalerie(film, destination) {
 
   const container = document.createElement("article");
@@ -146,7 +165,7 @@ function afficherFilmGalerie(film, destination) {
   coeur.classList.add("bouton-favoris");
   coeur.type = "button";
 
-  // Initialisation de l'état du boutton
+  // Initialisation de l'état du boutton favoris
   const estFavori = checkFavoris().includes(film.imdbID);
   coeur.textContent = estFavori ? "♥" : "♡";
   coeur.setAttribute(
@@ -175,6 +194,10 @@ function afficherFilmGalerie(film, destination) {
   destination.appendChild(container);
 }
 
+//---------------------------------------------
+//CREATION DU CAROUSSEL : 
+//---------------------------------------------
+
 const precedent = document.getElementById("precedent");
 const suivant = document.getElementById("suivant");
 const filmVedette = document.getElementById("film-vedette");
@@ -186,25 +209,26 @@ async function chargementFilmVedette() {
 
   for (let i = 0; i < fin; i++) {
     const film = await getFilm(filmsEnVedette[i]);
-    if (film != null) detailsFilmsVedette.push(film);  
+    if (film != null) detailsFilmsVedette.push(film);  // Si un film est trouvé, il est chargé dans le tableau detailsFilmsVedette
   }
 
       if (detailsFilmsVedette.length > 0) {
-    afficherFilmVedette(detailsFilmsVedette[indexVedette], filmVedette);
+    afficherFilmVedette(detailsFilmsVedette[indexVedette], filmVedette); // Si au moins un film a été chargé il sera affiché
   }
 }
 
+// Le défilement est basé sur le principe d'index.
 function defilementFilmVedette(direction) {
   if (detailsFilmsVedette.length > 0) {
 
-    indexVedette += direction;
+    indexVedette += direction; // Ajout de direction à index
 
   if (indexVedette >= detailsFilmsVedette.length) {
-  indexVedette = 0;
+  indexVedette = 0; // Si l’index dépasse le dernier film, on revient au premier
   }
 
   if (indexVedette < 0) {
-    indexVedette = detailsFilmsVedette.length - 1;
+    indexVedette = detailsFilmsVedette.length - 1; // Si l’index est négatif, on rpasse au dernier film
   }
 
     afficherFilmVedette(detailsFilmsVedette[indexVedette], filmVedette);
@@ -213,7 +237,8 @@ function defilementFilmVedette(direction) {
   else {return}
 }
 
-suivant.addEventListener("click", () => defilementFilmVedette(1));
+// Attribution des valeurs de direction 
+suivant.addEventListener("click", () => defilementFilmVedette(1)); 
 precedent.addEventListener("click", () => defilementFilmVedette(-1));
 
 const galerie = document.getElementById("galerie");
@@ -221,7 +246,7 @@ const loader = document.getElementById("chargement");
 let count= 0; // nombre d'images déjà affichées
 let isLoading = false; // évite de lancer un chargement pendant qu'un autre est en cours
 
-// Ajoute 10 images à la fin de la galerie
+// Ajoute 5 images à la fin de la galerie
 async function chargementFilmGalerie() {
   if (isLoading || count >= films.length) return;
   isLoading = true;
@@ -242,7 +267,6 @@ count = fin;
   loader.hidden = true;
   isLoading = false;
 
-  // Sur un grand écran, 10 images peuvent ne pas suffire à remplir la page
   checkBottom();
 }
 
@@ -256,7 +280,7 @@ function checkBottom() {
   }
 }
 
-// Première série d'images, puis vérification à chaque défilement
+
 chargementFilmVedette();
 chargementFilmGalerie();
 window.addEventListener("scroll", checkBottom);

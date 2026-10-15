@@ -68,7 +68,7 @@ function genererUneEntete() {
         }
 });
 
-    //hamburger mobile
+    //hamburger mobile : intégration de la fonctionnalité dans la nav bar pour, laisser de la place aux films de l'index sur mobile
     const bouton_hamburger = document.createElement("button");
     bouton_hamburger.type = "button";
     bouton_hamburger.classList.add("bouton-toggle-mobile");
