@@ -1,3 +1,5 @@
+// Utilisation du module "stockageFavoris" car il est utilisé dans toutes les pages 
+
 import {
   checkFavoris,
   getFavoris
@@ -30,11 +32,13 @@ async function FilmId(imdbID) {
 async function chargerFavoris() {
   const identifiants = checkFavoris();
 
+  // Si aucun film dans les favoris affichage d'un message 
   if (identifiants.length === 0) {
     messageFavoris.textContent = "Vous n’avez pas encore de films favoris.";
     return;
   }
 
+  // Chargement de tous les films avec affichage d'un message en attendant
   messageFavoris.textContent = "Chargement de vos favoris...";
 
   const films = await Promise.all(
@@ -49,6 +53,7 @@ if (filmsTrouves.length === 0) {
   return;
 }
 
+// Vide si nous sommes dans aucuns des cas de la fonction du dessus
 messageFavoris.textContent = "";
 
 // Création de cartes par films trouvés
