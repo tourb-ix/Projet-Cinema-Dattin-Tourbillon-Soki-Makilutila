@@ -75,7 +75,7 @@ nouv_tabl_films().then((résultat)=>{
         optionHTML+=`<option value=${categorie}>${categorie}</option>`
     });
     categorieSelect.innerHTML+=optionHTML;
-    /*Remplissage du tableau*/
+    //Remplissage du tableau
     let filmFiltre=[...tabl_films]
     function remplirTableau(){ 
         let lignes="";
