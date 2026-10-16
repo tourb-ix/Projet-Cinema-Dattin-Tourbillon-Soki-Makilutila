@@ -5,6 +5,7 @@ Ce projet cinéma a été réalisé par Jean-Baptiste DATTIN, Augustin Soki-Maki
 Lien du projet Github : https://github.com/tourb-ix/Projet-Cinema-Dattin-Tourbillon-Soki-Makilutila
 
 Il comporte 4 types de pages :
+
     -  Accueil (index.html)
     -  Détail du film (movie.html)
     -  Recherche de film parmi tous ceux proposés par le cinéma (search.html)
@@ -12,6 +13,7 @@ Il comporte 4 types de pages :
 
 Les contenus relatifs aux films sont récupérés via l'API "OMBD API".
 Nous avons choisis 18 films pour ce projets de manière arbitraire :
+
     "Who Framed Roger Rabbit",
     "the little mermaid",
     "12 angry men",
@@ -32,6 +34,7 @@ Nous avons choisis 18 films pour ce projets de manière arbitraire :
     "Battlestar Galactica"
 
 Nous avons répartie le travail ainsi :
+
     Augustin : 
         -  index dont carroussel et films mis en avant
         -  système de favoris implanté à l'index 
