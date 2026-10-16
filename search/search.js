@@ -1,3 +1,4 @@
+//Importation des fonctions relatives aux favoris
 import {
   checkFavoris,
   getFavoris
@@ -11,7 +12,7 @@ function afficheOK(url){
         img.src=url;
     });
 }
-/*Récupération d'un film dans l'API*/
+//Récupération d'un film dans l'API
 async function getFilm(titreFilm){
     try{
         const reponse=await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(titreFilm)}&apikey=242fe89`);
@@ -29,7 +30,7 @@ async function getFilm(titreFilm){
     }
 }
 
-/*Récupération de plusieurs films de l'API dans un tableau*/
+//Récupération de plusieurs films de l'API dans un tableau
 
 async function nouv_tabl_films(){
     const API_films=[];
@@ -47,6 +48,7 @@ async function nouv_tabl_films(){
     return(API_films);
 }
 
+//Génération des éléments DOM et de la variable tableau de films
 let tabl_films;
 const list_films=document.getElementById("list_films");
 const recherche = document.getElementById("recherche");
@@ -59,13 +61,15 @@ nouv_tabl_films().then((résultat)=>{
         return({Affiche:film.Poster,Titre:film.Title,Réalisateur:film.Director,Catégorie:film.Genre,Année:film.Year,imdbID:film.imdbID})
     });
 
-    /*Remplissage des options du select de catégories*/
-    let categories=new Set(); /*Créer un tableau qui ignore les doublons*/
+    //Remplissage des options du select de catégories
+    let categories=new Set(); //Créer un tableau qui ignore les doublons
     tabl_films.forEach(film=>{
         film.Catégorie.split(/,\s*/).forEach(caté=>{
             categories.add(caté)
     });
     });
+
+    //Remplissage des options du select des catégories selon le tableau de film
     let optionHTML="";
     categories.forEach(categorie=>{
         optionHTML+=`<option value=${categorie}>${categorie}</option>`
@@ -82,6 +86,7 @@ nouv_tabl_films().then((résultat)=>{
             const textBouton = estFavori ? "♥" : "♡";
             const aria = estFavori ? `Retirer ${film.Titre} des favoris` : `Ajouter ${film.Titre} aux favoris`;
             
+            //Création du contenu html implanté plus tard
             lignes+=`<tr>
                 <td><a href="../movie/movie.html?id=${encodeURIComponent(film.imdbID)}"><img class="poster_film" src="${film.Affiche}" alt="Affiche de ${film.Titre}"/></a><button type="button" class="bouton-favoris" data-id="${film.imdbID}" aria-label="${aria}">${textBouton}</button></td>
                 <td><a id="aTitre" href="../movie/movie.html?id=${encodeURIComponent(film.imdbID)}"><strong>${film.Titre}</strong></a></td>
@@ -90,18 +95,21 @@ nouv_tabl_films().then((résultat)=>{
                 <td>${film.Année}</td>
             </tr>`; 
         });
+        //Implantation le contenu html
         list_films.innerHTML=lignes;
     }
 
+    //Ecouteur du click du bouton favoris afin de le changer dynamiquement
     list_films.addEventListener("click", (event) => {
         
         const bouton=event.target.closest(".bouton-favoris");
         if(!bouton){return;};
         event.stopPropagation();
         const filmID=bouton.getAttribute('data-id');
-        const film=filmFiltre.find(f=> f.imdbID===filmID);
+        const film=filmFiltre.find(f=> f.imdbID===filmID); //Récupération du bon ID de film
         getFavoris(film);
         const favoris = checkFavoris().includes(film.imdbID);
+        //Changement des attributs du bouton pour correspondre à son état favori ou non
         bouton.textContent = favoris ? "♥" : "♡";
         bouton.setAttribute(
             "aria-label",
@@ -114,7 +122,7 @@ nouv_tabl_films().then((résultat)=>{
         const categorieChoisie = categorieSelect.value;
         const ordreDate = date.value;
 
-        /*Filtre des catégories et de la barre de recherche par rapport au titre et au réalisateur*/
+        //Filtre des catégories et de la barre de recherche par rapport au titre et au réalisateur
         filmFiltre = tabl_films.filter(film => {
             return ((film.Titre.toLowerCase().includes(motRecherche) || film.Réalisateur.toLowerCase().includes(motRecherche)) && (categorieChoisie === "toutes" || film.Catégorie.includes(categorieChoisie)));
         });
@@ -126,6 +134,8 @@ nouv_tabl_films().then((résultat)=>{
         });
         remplirTableau();
     }
+
+    //Ajout d'écouteur afin que le page chnage dynamiquement 
     recherche.addEventListener('input', afficherFilms);
     categorieSelect.addEventListener('change', afficherFilms);
     date.addEventListener('change', afficherFilms);
