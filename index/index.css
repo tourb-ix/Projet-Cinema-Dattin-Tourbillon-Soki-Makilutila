@@ -57,34 +57,37 @@
   object-fit: contain;
 }
 
+/* On réserve au préalable l'espace de l'image pour que tout reste en place pendant la transition */
 .vedette-carte {
-  display: flex;
+  display: grid;
+  grid-template-columns: 45% 55%;
   align-items: center;
   position: relative;
   overflow: hidden;
   min-height: 700px;
   color: white;
-  background-color:rgb(3, 3, 67);
+  background-color: rgb(3, 3, 67);
 }
 
 /* Animation de la carte qui se déplace sur le coté gauche pour faire apparaître le texte sur la droite */
 
 .vedette-carte img {
-  flex: 0 0 100%;
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
   height: 700px;
   object-fit: contain;
-  transition: flex-basis 0.5s ease;
+  transition: transform 0.5s ease;
 }
 
 .vedette-infos {
-  flex: 1;
+  grid-column: 2;
   position: relative;
   z-index: 2;
   padding: 2rem;
   opacity: 0;
   transition: opacity 0.25s ease;
 }
-
 .vedette-lien-ordinateur {
   position: absolute;
   inset: 0;
@@ -113,7 +116,7 @@
 /* Pour éviter que le tape du téléphone ne laisse l'effet hover*/
 @media (hover: hover) {
   .vedette-carte:hover img {
-    flex-basis: 45%;
+    transform: translateX(-25%);
   }
 
   .vedette-carte:hover .vedette-infos {
@@ -123,7 +126,7 @@
 }
 
 .vedette-carte.infos-visible img {
-  flex-basis: 45%;
+  transform: translateX(-25%);
 }
 
 .vedette-carte.infos-visible .vedette-infos {
